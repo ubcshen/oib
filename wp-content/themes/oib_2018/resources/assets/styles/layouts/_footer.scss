@@ -1,0 +1,22 @@
+.content-info {
+  text-align: center;
+  .copyright {
+    position: relative;
+    &::before,
+    &::after {
+      content: '';
+      background: #ccc;
+      width: 37%;
+      display: block;
+      position: absolute;
+      height: 2px;
+      top: 11px;
+    }
+    &::before {
+      left: 0;
+    }
+    &::after {
+      right: 0;
+    }
+  }
+}
