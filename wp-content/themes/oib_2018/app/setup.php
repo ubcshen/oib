@@ -87,6 +87,15 @@ if( function_exists('acf_add_options_page') ) {
     'capability'  => 'activate_plugins',
     'redirect'    => false
   ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Header Setting',
+    'menu_title'  => 'Header Setting',
+    'menu_slug'   => 'header_setting',
+    'parent_slug'   => $parent['menu_slug'],
+    'capability'  => 'activate_plugins',
+    'redirect'    => false
+  ));
 }
 
 

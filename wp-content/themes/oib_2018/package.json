@@ -27,6 +27,8 @@
     "rules": {
       "no-empty-source": null,
       "rule-empty-line-before": null,
+      "no-descending-specificity": null,
+      "function-comma-space-after": null,
       "at-rule-no-unknown": [
         true,
         {
