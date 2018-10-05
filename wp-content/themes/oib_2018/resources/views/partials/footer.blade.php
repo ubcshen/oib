@@ -5,11 +5,11 @@
     <hr class="short" />
     <a href="/privacy/">Privacy Policy</a>
     <div class="social_medias">
-      <div class="inline boldMF"><?php the_field('follow_us', 'option');; ?></div>
+      <div class="inline boldMF"><?php the_field('follow_us', 'option'); ?></div>
       <div class="inline social_icons">
         <?php while(has_sub_field('social_medias', 'option')): $image = get_sub_field('social_media_icon', 'option'); ?>
           <a class="social_icon inline" href="<?php echo get_sub_field("social_media_link", 'option'); ?>" target="_blank">
-            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="36" height="36" class="img-responsive" />
+            <i class="<?php echo get_sub_field('social_media_icon', 'option'); ?>"></i>
           </a>
         <?php  endwhile; ?>
       </div>

@@ -7,63 +7,6 @@ use Roots\Sage\Assets\JsonManifest;
 use Roots\Sage\Template\Blade;
 use Roots\Sage\Template\BladeProvider;
 
-/**
- * Custom functions
- */
-
-// Remove Open Sans that WP adds from frontend
-if (!function_exists('remove_wp_open_sans')) :
-function remove_wp_open_sans() {
-wp_deregister_style( 'open-sans' );
-wp_register_style( 'open-sans', false );
-}
-add_action('wp_enqueue_scripts', 'remove_wp_open_sans');
-endif;
-
-add_filter( 'rest_endpoints', function( $endpoints ){
-    if ( isset( $endpoints['/wp/v2/users'] ) ) {
-        unset( $endpoints['/wp/v2/users'] );
-    }
-    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
-    }
-    return $endpoints;
-});
-
-remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
-
-add_action( 'init', function() {
-  // Remove the REST API endpoint.
-  remove_action('rest_api_init', 'wp_oembed_register_route');
-  // Turn off oEmbed auto discovery.
-  // Don't filter oEmbed results.
-  remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10);
-  // Remove oEmbed discovery links.
-  remove_action('wp_head', 'wp_oembed_add_discovery_links');
-  // Remove oEmbed-specific JavaScript from the front-end and back-end.
-  remove_action('wp_head', 'wp_oembed_add_host_js');
-}, PHP_INT_MAX - 1 );  // remove the wp-embed.min.js file from the frontend completely
-
-function multiexplode ($delimiters,$string) {
-
-    $ready = str_replace($delimiters, $delimiters[0], $string);
-    $launch = explode($delimiters[0], $ready);
-    return  $launch;
-}
-
-//remove wordpress dns-prefetch
-function remove_dns_prefetch( $hints, $relation_type ) {
-    if ( 'dns-prefetch' === $relation_type ) {
-        return array_diff( wp_dependencies_unique_hosts(), $hints );
-    }
-
-    return $hints;
-}
-
-add_filter( 'wp_resource_hints', 'remove_dns_prefetch', 10, 2 );
 
 if( !defined('OIB_PAGE_PATH') ){
     define('OIB_PAGE_PATH', get_template_directory() .'/' );
@@ -92,6 +35,15 @@ if( function_exists('acf_add_options_page') ) {
     'page_title'  => 'Header Setting',
     'menu_title'  => 'Header Setting',
     'menu_slug'   => 'header_setting',
+    'parent_slug'   => $parent['menu_slug'],
+    'capability'  => 'activate_plugins',
+    'redirect'    => false
+  ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Topbar Setting',
+    'menu_title'  => 'Topbar Setting',
+    'menu_slug'   => 'topbar_setting',
     'parent_slug'   => $parent['menu_slug'],
     'capability'  => 'activate_plugins',
     'redirect'    => false
@@ -222,5 +174,4 @@ add_action('after_setup_theme', function () {
         return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
 });
-
 

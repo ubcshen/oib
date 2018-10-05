@@ -1,7 +1,479 @@
+%font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  .isWindowsChrome & {
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+}
+
+%fix-webkit-font-rendering {
+  @extend %font-smoothing;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+sub,
+sup,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+i,
+b,
+em,
+strong,
+blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-family: $default-font;
+  font-weight: 400;
+  //font-style: normal;
+  font-size: 20px;
+  color: $default-font-color;
+  @extend %fix-webkit-font-rendering;
+  letter-spacing: 0;
+  letter-spacing: -0.56px;
+}
+
+div,
+h2,
+h3 {
+  color: #444;
+}
+body {
+  line-height: 1;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+nav ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+  content: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+}
+
+h1 {
+  @include font-size-sass(36px);
+  color: $h-font-color;
+}
+
+html {
+  // Prevent font scaling in landscape while allowing user zoom
+  -webkit-text-size-adjust: 100%;
+}
+
+@mixin breakpoint($point) {
+  @if $point == large2000-up {
+    @media (min-width: 2000px) {
+      @content;
+    }
+  } @else if $point == large1800-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  } @else if $point == large1700-up {
+    @media (min-width: 1700px) {
+      @content;
+    }
+  } @else if $point == medium1780-down {
+    @media (max-width: 1780px) {
+      @content;
+    }
+  } @else if $point == medium1575-down {
+    @media (max-width: 1575px) {
+      @content;
+    }
+  } @else if $point == medium1500-up {
+    @media (min-width: 1500px) {
+      @content;
+    }
+  } @else if $point == medium1450-down {
+    @media (max-width: 1450px) {
+      @content;
+    }
+  } @else if $point == medium1400-down {
+    @media (max-width: 1400px) {
+      @content;
+    }
+  } @else if $point == medium1300-down {
+    @media (max-width: 1300px) {
+      @content;
+    }
+  } @else if $point == medium1250-down {
+    @media (max-width: 1250px) {
+      @content;
+    }
+  } @else if $point == medium1200-down {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  } @else if $point == medium1200-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $point == medium1180-down {
+    @media (max-width: 1180px) {
+      @content;
+    }
+  } @else if $point == medium1170-down {
+    @media (max-width: 1170px) {
+      @content;
+    }
+  } @else if $point == medium1150-down {
+    @media (max-width: 1150px) {
+      @content;
+    }
+  } @else if $point == medium1132-down {
+    @media (max-width: 1132px) {
+      @content;
+    }
+  } @else if $point == medium1110-down {
+    @media (max-width: 1110px) {
+      @content;
+    }
+  } @else if $point == medium1100-down {
+    @media (max-width: 1100px) {
+      @content;
+    }
+  } @else if $point == medium1095-down {
+    @media (max-width: 1095px) {
+      @content;
+    }
+  } @else if $point == medium1080-down {
+    @media (max-width: 1080px) {
+      @content;
+    }
+  } @else if $point == medium1070-down {
+    @media (max-width: 1070px) {
+      @content;
+    }
+  } @else if $point == medium1055-down {
+    @media (max-width: 1055px) {
+      @content;
+    }
+  } @else if $point == medium1050-down {
+    @media (max-width: 1050px) {
+      @content;
+    }
+  } @else if $point == medium1025-down {
+    @media (max-width: 1025px) {
+      @content;
+    }
+  } @else if $point == medium1024-up {
+    @media (min-width: 1025px) {
+      @content;
+    }
+  } @else if $point == medium1023-down {
+    @media (max-width: 1023px) {
+      @content;
+    }
+  } @else if $point == medium1000-down {
+    @media (max-width: 1000px) {
+      @content;
+    }
+  } @else if $point == medium990-down {
+    @media (max-width: 990px) {
+      @content;
+    }
+  } @else if $point == medium983-down {
+    @media (max-width: 983px) {
+      @content;
+    }
+  } @else if $point == medium970-down {
+    @media (max-width: 970px) {
+      @content;
+    }
+  } @else if $point == medium966-down {
+    @media (max-width: 966px) {
+      @content;
+    }
+  } @else if $point == medium960-down {
+    @media (max-width: 960px) {
+      @content;
+    }
+  } @else if $point == medium950-down {
+    @media (max-width: 950px) {
+      @content;
+    }
+  } @else if $point == medium940-down {
+    @media (max-width: 940px) {
+      @content;
+    }
+  } @else if $point == medium936-down {
+    @media (max-width: 936px) {
+      @content;
+    }
+  } @else if $point == medium910-down {
+    @media (max-width: 910px) {
+      @content;
+    }
+  } @else if $point == medium900-down {
+    @media (max-width: 900px) {
+      @content;
+    }
+  } @else if $point == medium900-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $point == medium870-down {
+    @media (max-width: 870px) {
+      @content;
+    }
+  } @else if $point == medium860-down {
+    @media (max-width: 860px) {
+      @content;
+    }
+  } @else if $point == medium800-up {
+    @media (min-width: 801px) {
+      @content;
+    }
+  } @else if $point == medium800-down {
+    @media (max-width: 800px) {
+      @content;
+    }
+  } @else if $point == medium767-down {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $point == medium750-down {
+    @media (max-width: 750px) {
+      @content;
+    }
+  } @else if $point == medium700-up {
+    @media (min-width: 701px) {
+      @content;
+    }
+  } @else if $point == medium700-down {
+    @media (max-width: 700px) {
+      @content;
+    }
+  } @else if $point == medium660-down {
+    @media (max-width: 660px) {
+      @content;
+    }
+  } @else if $point == small640-down {
+    @media (max-width: 640px) {
+      @content;
+    }
+  } @else if $point == small580-down {
+    @media (max-width: 580px) {
+      @content;
+    }
+  } @else if $point == small568-down {
+    @media (max-width: 568px) {
+      @content;
+    }
+  } @else if $point == small480-up {
+    @media (min-width: 481px) {
+      @content;
+    }
+  } @else if $point == small480-down {
+    @media (max-width: 480px) {
+      @content;
+    }
+  } @else if $point == small400-down {
+    @media (max-width: 400px) {
+      @content;
+    }
+  } @else if $point == small385-down {
+    @media (max-width: 385px) {
+      @content;
+    }
+  } @else if $point == small380-down {
+    @media (max-width: 380px) {
+      @content;
+    }
+  } @else if $point == small370-down {
+    @media (max-width: 370px) {
+      @content;
+    }
+  } @else if $point == small360-down {
+    @media (max-width: 360px) {
+      @content;
+    }
+  }
+}
+
+.container {
+  @include breakpoint(medium1200-up) {
+    max-width: 1300px;
+  }
+}
+
+.fLeft {
+  float: left;
+  @include breakpoint(medium800-down) {
+    float: none;
+    display: inline-block;
+  }
+}
+.fRight {
+  float: right;
+  @include breakpoint(medium800-down) {
+    float: none;
+    display: inline-block;
+  }
+}
+
 .inline {
   display: inline-block;
 }
 
 hr.short {
   width: 100px;
+}
+
+.semiBold {
+  font-weight: 600;
+}
+
+.white {
+  color: #fff;
+}
+
+.topbar {
+  padding: 20px 0;
+  visibility: visible;
+  opacity: 1;
+  .container {
+    color: #fff;
+    a {
+      @include font-size-sass(20px);
+      text-decoration: underline;
+    }
+  }
+  &.hiddenTop {
+    @include transition3x(
+      visibility 0.3s linear,
+      opacity 0.3s linear,
+      padding 0.3s linear
+    );
+    visibility: hidden;
+    opacity: 0;
+    padding: 0;
+    .container a {
+      font-size: 0;
+    }
+  }
+}
+
+.cookieText {
+  width: 64%;
+  font-weight: 600;
+  color: #fff;
+  padding: 40px 0;
+  line-height: 1.8;
+}
+
+.cooikeBtns {
+  width: 30%;
+  /*position: absolute;
+  right: 0;
+  bottom: 0;*/
+  .medium.cli-plugin-button.cli-plugin-button.cookie_action_close_header_reject {
+    background-color: transparent !important;
+    font-weight: 600;
+    @include font-size-sass(20px);
+  }
+  .medium.cli-plugin-button.cli-plugin-button.cli-accept-button {
+    font-weight: 600;
+    background-color: #4a4a4a;
+    padding: 25px 40px;
+    @include font-size-sass(20px);
+  }
+}
+
+#cookie-law-info-bar {
+  position: relative !important;
+  overflow: hidden;
 }
