@@ -114,7 +114,8 @@
     "webpack-dev-middleware": "~2.0.4",
     "webpack-hot-middleware": "~2.22.3",
     "webpack-merge": "~4.1.4",
-    "yargs": "~11.0.0"
+    "yargs": "~11.0.0",
+    "isotope-layout": "~3.0.6"
   },
   "dependencies": {
     "bootstrap": "v4.1.3",

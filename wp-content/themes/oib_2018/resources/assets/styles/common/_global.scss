@@ -91,7 +91,7 @@ blockquote {
   font-size: 20px;
   color: $default-font-color;
   @extend %fix-webkit-font-rendering;
-  letter-spacing: 0;
+  line-height: 1.8;
   letter-spacing: -0.56px;
 }
 
@@ -145,6 +145,9 @@ h2 {
 h1 {
   @include font-size-sass(36px);
   color: $h-font-color;
+  a {
+    color: #b0291c;
+  }
 }
 
 html {
@@ -476,4 +479,22 @@ hr.short {
 #cookie-law-info-bar {
   position: relative !important;
   overflow: hidden;
+}
+
+h2 {
+  @include font-size-sass(36px);
+  line-height: 1.28;
+  color: #b0291c;
+  letter-spacing: -1px;
+}
+
+.cta-brown,
+h4 {
+  color: #ab9767;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+h4 {
+  @include font-size-sass(16px);
 }

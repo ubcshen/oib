@@ -1,11 +1,8 @@
 export default {
   init() {
-    // JavaScript to be fired on all pages
-    $(".icon-cancel-circled").click(function() {
-      $(".topbar").addClass("hiddenTop");
-    });
-
-    $(".tab").click(function() {
+    // JavaScript to be fired on the home page
+    // init Isotope
+    /*$(".tab").click(function() {
       $(".tab").removeClass("tab-active");
       $(this).addClass("tab-active");
       var filterValue = $(this).attr("data-filter");
@@ -16,16 +13,10 @@ export default {
       });
     });
 
-    $(window).load(function(){
-      if ($(".fliter-btns-group").length) {
-        $(".tab-active").trigger("click");
-      }
-    });
-
     var initScroll = function() {
       if ($(".grid.infinitescroll").length) {
         $(".grid").infinitescroll({
-          behavior: "twitter",
+          behavior  : 'twitter',
           bufferPx: 40,
           //debug  : false,
           loading: {
@@ -43,31 +34,9 @@ export default {
         });
       }
     };
-
-    initScroll();
-
-    /*if ($(".fliter-btns-group").length) {
-      $(".fliter-btns-group .tab").first().trigger("click");
-    }*/
-
-    /*var setTab = function() {
-      if ($(".fliter-btns-group").length) {
-        var filterValue = $(".fliter-btns-group .tab:first-child").attr(
-          "data-filter"
-        );
-        if (filterValue !== "*") {
-          $(".grid").isotope({
-            itemSelector: ".element-item",
-            layoutMode: "fitRows",
-            filter: filterValue,
-          });
-        }
-      }
-    };
-
-    setTab();*/
+    initScroll();*/
   },
   finalize() {
-    // JavaScript to be fired on all pages, after page specific JS is fired
+    // JavaScript to be fired on the home page, after the init JS
   },
 };

@@ -58,7 +58,7 @@ array_map(function ($file) use ($sage_error) {
     if (!locate_template($file, true, true)) {
         $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
     }
-}, ['helpers', 'setup', 'filters', 'admin']);
+}, ['helpers', 'setup', 'filters', 'admin', 'news', 'custom']);
 
 /**
  * Here's what's happening with these hooks:
@@ -91,99 +91,3 @@ Container::getInstance()
         ]);
     }, true);
 
-/**
- * Custom functions
- */
-
-// Remove Open Sans that WP adds from frontend
-if (!function_exists('remove_wp_open_sans')) :
-function remove_wp_open_sans() {
-wp_deregister_style( 'open-sans' );
-wp_register_style( 'open-sans', false );
-}
-add_action('wp_enqueue_scripts', 'remove_wp_open_sans');
-endif;
-
-add_filter( 'rest_endpoints', function( $endpoints ){
-    if ( isset( $endpoints['/wp/v2/users'] ) ) {
-        unset( $endpoints['/wp/v2/users'] );
-    }
-    if ( isset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] ) ) {
-        unset( $endpoints['/wp/v2/users/(?P<id>[\d]+)'] );
-    }
-    return $endpoints;
-});
-
-remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
-remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
-remove_action( 'wp_print_styles', 'print_emoji_styles' );
-remove_action( 'admin_print_styles', 'print_emoji_styles' );
-
-add_action( 'init', function() {
-  // Remove the REST API endpoint.
-  remove_action('rest_api_init', 'wp_oembed_register_route');
-  // Turn off oEmbed auto discovery.
-  // Don't filter oEmbed results.
-  remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10);
-  // Remove oEmbed discovery links.
-  remove_action('wp_head', 'wp_oembed_add_discovery_links');
-  // Remove oEmbed-specific JavaScript from the front-end and back-end.
-  remove_action('wp_head', 'wp_oembed_add_host_js');
-}, PHP_INT_MAX - 1 );  // remove the wp-embed.min.js file from the frontend completely
-
-function multiexplode ($delimiters,$string) {
-
-    $ready = str_replace($delimiters, $delimiters[0], $string);
-    $launch = explode($delimiters[0], $ready);
-    return  $launch;
-}
-
-//remove wordpress dns-prefetch
-function remove_dns_prefetch( $hints, $relation_type ) {
-    if ( 'dns-prefetch' === $relation_type ) {
-        return array_diff( wp_dependencies_unique_hosts(), $hints );
-    }
-
-    return $hints;
-}
-
-add_filter( 'wp_resource_hints', 'remove_dns_prefetch', 10, 2 );
-
-// GET SECTION BUILDER
-function build_sections()
-{
-    $question_count = 1;
-
-    if( get_field('section_builder') )
-    {
-        while( has_sub_field("section_builder") )
-        {
-            if( get_row_layout() == "section_html" ) // layout: Section Html
-            { ?>
-                <section class="container section_html">
-                    <?php echo get_sub_field("html_field"); ?>
-                </section>
-            <?php }
-            elseif( get_row_layout() == "section_image_with_text" ) // layout: Section image with text
-            {
-                $imageAlignment = get_sub_field("image_alignment");
-                $textAlignement = $imageAlignment;
-                $image = get_sub_field('section_image');
-            ?>
-                <section class="container section_image_with_text">
-                    <div class="content">
-                        <?php echo get_sub_field("section_content"); ?>
-                    </div>
-                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive" />
-                </section>
-            <?php }
-            elseif( get_row_layout() == "section_subscribe" ) // layout: Section Banner
-            { ?>
-                <section class="container section_subscribe">
-                    <h2><?php echo get_sub_field("section_subscribe_title"); ?></h2>
-                    <div class="section-content"><?php echo get_sub_field("section_subscribe_content"); ?></div>
-                </section>
-            <?php }
-        }
-    }
-}

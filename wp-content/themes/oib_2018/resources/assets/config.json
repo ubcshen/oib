@@ -8,7 +8,7 @@
       "./scripts/customizer.js"
     ]
   },
-  "publicPath": "/wp-content/themems/oib_2018",
+  "publicPath": "/wp-content/themes/oib_2018",
   "devUrl": "http://oib.local",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",

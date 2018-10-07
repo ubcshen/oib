@@ -7,50 +7,6 @@ use Roots\Sage\Assets\JsonManifest;
 use Roots\Sage\Template\Blade;
 use Roots\Sage\Template\BladeProvider;
 
-
-if( !defined('OIB_PAGE_PATH') ){
-    define('OIB_PAGE_PATH', get_template_directory() .'/' );
-}
-require_once OIB_PAGE_PATH . 'mobiledetect/Mobile_Detect.php';
-
-
-if( function_exists('acf_add_options_page') ) {
-  // add parent
-  $parent = acf_add_options_page(array(
-    'page_title'  => 'OIB Settings',
-    'menu_title'  => 'OIB Settings',
-    'redirect'    => false
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title'  => 'Footer CopyRight',
-    'menu_title'  => 'Footer CopyRight',
-    'menu_slug'   => 'footer-copyright',
-    'parent_slug'   => $parent['menu_slug'],
-    'capability'  => 'activate_plugins',
-    'redirect'    => false
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title'  => 'Header Setting',
-    'menu_title'  => 'Header Setting',
-    'menu_slug'   => 'header_setting',
-    'parent_slug'   => $parent['menu_slug'],
-    'capability'  => 'activate_plugins',
-    'redirect'    => false
-  ));
-
-  acf_add_options_sub_page(array(
-    'page_title'  => 'Topbar Setting',
-    'menu_title'  => 'Topbar Setting',
-    'menu_slug'   => 'topbar_setting',
-    'parent_slug'   => $parent['menu_slug'],
-    'capability'  => 'activate_plugins',
-    'redirect'    => false
-  ));
-}
-
-
 /**
  * Theme assets
  */
@@ -174,4 +130,5 @@ add_action('after_setup_theme', function () {
         return "<?= " . __NAMESPACE__ . "\\asset_path({$asset}); ?>";
     });
 });
+
 
