@@ -59,6 +59,31 @@
   content: "\f308";
 } /* '' */
 
+.icon-cancel-circled-after {
+  font-style: normal;
+  &::after {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0.2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    content: "\e800";
+    color: #4a4a4a;
+    font-size: 40px;
+    vertical-align: middle;
+  }
+}
+
 i:hover {
   cursor: pointer;
 }

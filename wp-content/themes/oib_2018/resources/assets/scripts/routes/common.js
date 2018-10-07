@@ -84,8 +84,14 @@ export default {
       var lightbox = $(this).attr("data-lightbox");
       //console.log("."+lightbox);
       $(lightbox).fancybox({
-        //type: "inline",
-        //href: lightbox
+        smallBtn : true,
+        toolbar  : false,
+        btnTpl: {
+          smallBtn:
+            '<button data-fancybox-close class="fancybox-button fancybox-button--close" title="{{CLOSE}}">' +
+            '<i class="icon-cancel-circled-after fRight">Close</i>' +
+            "</button>",
+        },
       }).trigger("click");
     });
   },
