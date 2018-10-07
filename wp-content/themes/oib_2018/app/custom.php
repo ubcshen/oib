@@ -308,19 +308,21 @@ function build_sections()
             elseif( get_row_layout() == "section_banner" ) // layout: Section Banner
             { ?>
                 <?php load_Img(".section-banner", "banner_background_image"); ?>
-                <section class="section-banner normalHeight">
+                <section class="section-banner normalHeight valign-center">
                     <div class="container">
-                        <div class="fLeft banner-content">
-                            <?php if(get_sub_field("banner_lightbox_video")) { ?>
-                                <div class="video-btn">
-                                    <a href="">Watch Video</a>
-                                </div>
-                            <?php } ?>
-                            <h1><?php echo get_sub_field("banner_header"); ?></h1>
-                            <div class="section-banner-content"><?php echo get_sub_field("banner_subheader"); ?></div>
-                            <?php if(get_sub_field("photo_credit")) { ?>
-                                <div class="credit"><?php echo get_sub_field("photo_credit"); ?></div>
-                            <?php } ?>
+                        <div class="inner-container">
+                            <div class="fLeft banner-content">
+                                <?php if(get_sub_field("banner_lightbox_video")) { ?>
+                                    <div class="video-btn">
+                                        <a href="">Watch Video</a>
+                                    </div>
+                                <?php } ?>
+                                <h1><?php echo get_sub_field("banner_header"); ?></h1>
+                                <div class="section-banner-content"><?php echo get_sub_field("banner_subheader"); ?></div>
+                                <?php if(get_sub_field("photo_credit")) { ?>
+                                    <div class="credit"><?php echo get_sub_field("photo_credit"); ?></div>
+                                <?php } ?>
+                            </div>
                         </div>
                     </div>
                 </section>

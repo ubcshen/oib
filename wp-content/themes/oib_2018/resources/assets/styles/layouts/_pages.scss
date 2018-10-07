@@ -16,20 +16,22 @@
     line-height: 0.82;
   }
   .container {
-    position: relative;
-    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: -1em;
   }
   .banner-content {
-    position: absolute;
-    left: 0;
-    top: 50%;
-    margin-top: -108px;
-    div {
+    .section-banner-content {
       @include font-size-sass(26px);
       letter-spacing: -0.72px;
       line-height: 1.38;
       max-width: 520px;
       margin-top: 30px;
+    }
+    .credit {
+      @include font-size-sass(16px);
+      position: absolute;
+      bottom: 40px;
     }
   }
 }
@@ -301,5 +303,11 @@
         right: 40px;
       }
     }
+  }
+}
+
+.careers {
+  .section-html {
+    padding: 70px 0;
   }
 }

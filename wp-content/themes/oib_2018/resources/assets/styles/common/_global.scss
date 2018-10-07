@@ -387,6 +387,37 @@ html {
   }
 }
 
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@mixin valign-center {
+  font-size: 0;
+
+  & > * {
+    @include font-size-sass(16px);
+    vertical-align: middle;
+    margin: 0;
+    display: inline-block;
+  }
+
+  &::before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+    vertical-align: middle;
+    margin-right: -0.25em; /* Adjusts for spacing */
+  }
+}
+
+.valign-center {
+  @include valign-center;
+}
+
 .container {
   @include breakpoint(medium1200-up) {
     max-width: 1300px;
