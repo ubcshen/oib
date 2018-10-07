@@ -259,7 +259,9 @@ function build_sections()
                 $contentAlignement = get_sub_field("text_alignment");
             ?>
                 <section class="container section-html" style="text-align: <?php echo $contentAlignement; ?>">
-                    <?php echo get_sub_field("html_field"); ?>
+                    <div class="inner-container">
+                        <?php echo get_sub_field("html_field"); ?>
+                    </div>
                 </section>
             <?php }
             elseif( get_row_layout() == "section_image_with_text" ) // layout: Section image with text
@@ -269,10 +271,12 @@ function build_sections()
                 $image = get_sub_field('section_image');
             ?>
                 <section class="container section-image-with-text">
-                    <div class="content">
-                        <?php echo get_sub_field("section_content"); ?>
+                    <div class="inner-container">
+                        <div class="content f<?php echo $textAlignement; ?>">
+                            <?php echo get_sub_field("section_content"); ?>
+                        </div>
+                        <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive f<?php echo $imageAlignment; ?>" />
                     </div>
-                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive" />
                 </section>
             <?php }
             elseif( get_row_layout() == "section_subscribe" ) // layout: Section Subscribe
