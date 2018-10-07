@@ -46,6 +46,19 @@ export default {
 
     initScroll();
 
+    $('.bxslider').bxSlider({
+      adaptiveHeight: false,
+      controls: true,
+      auto: false,
+      randomStart: false,
+      hideControlOnEnd: true,
+      infiniteLoop: false,
+      pager: false,
+      slideWidth: 1280,
+      //pagerCustom: '#bx-pager'+(index),
+      touchEnabled: true,
+    });
+
     /*if ($(".fliter-btns-group").length) {
       $(".fliter-btns-group .tab").first().trigger("click");
     }*/

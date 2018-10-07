@@ -33,3 +33,15 @@
   padding-top: 40px;
 }
 
+.menu-item {
+  a {
+    color: #ab9767;
+    @include font-size-sass(16px);
+  }
+  .current-menu-item a,
+  &.current-menu-ancestor > a,
+  &:hover > a {
+    color: #b0291c;
+    font-weight: 600;
+  }
+}

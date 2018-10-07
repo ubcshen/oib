@@ -36,6 +36,7 @@ module.exports = {
     "no-unused-vars": 0,
     "no-cond-assign": 0,
     "no-extra-boolean-cast": 0,
+    "no-undef": 0,
     "comma-dangle": [
       "error",
       {

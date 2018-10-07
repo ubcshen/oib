@@ -311,8 +311,16 @@ function build_sections()
                 <section class="section-banner normalHeight">
                     <div class="container">
                         <div class="fLeft banner-content">
+                            <?php if(get_sub_field("banner_lightbox_video")) { ?>
+                                <div class="video-btn">
+                                    <a href="">Watch Video</a>
+                                </div>
+                            <?php } ?>
                             <h1><?php echo get_sub_field("banner_header"); ?></h1>
                             <div class="section-banner-content"><?php echo get_sub_field("banner_subheader"); ?></div>
+                            <?php if(get_sub_field("photo_credit")) { ?>
+                                <div class="credit"><?php echo get_sub_field("photo_credit"); ?></div>
+                            <?php } ?>
                         </div>
                     </div>
                 </section>
@@ -336,6 +344,65 @@ function build_sections()
                                 <div><?php echo get_sub_field("section_intro_content"); ?></div>
                             </div>
                         </div>
+                    </div>
+                </section>
+            <?php }
+            elseif( get_row_layout() == "section_cols" ) // layout: Section Cols
+            {
+                $colNo = get_sub_field("col_number"); // only 2 right now
+                ?>
+                <section class="container section-cols section-cols-<?php echo $colNo; ?>">
+                    <div class="inner-container">
+                        <h2><?php echo get_sub_field("section_cols_headline"); ?></h2>
+                        <div class="section-content"><?php echo get_sub_field("section_cols_content"); ?></div>
+                    </div>
+                    <div class="cols">
+                        <?php
+                          while(has_sub_field('cols')):
+                            $image = get_sub_field('col_image');
+                            $newTab = get_sub_field('open_new_tab');
+                        ?>
+                        <div class="col">
+                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive col--<?php echo $colNo; ?>" />
+                            <div class="item-content">
+                                <h4><?php echo get_sub_field("col_title"); ?></h4>
+                                <a href="<?php echo get_sub_field("col_link"); ?>" class="cta-brown" target="<?php if($newTab) { echo '_blank'; } else { echo '_self'; } ?>"><?php echo get_sub_field("col_headline"); ?></a>
+                                <p><?php echo get_sub_field("col_content"); ?></p>
+                            </div>
+                        </div>
+                        <?php endwhile; ?>
+                    </div>
+                </section>
+            <?php }
+            elseif( get_row_layout() == "section_testimonials" ) // layout: Section Testimonials
+            { ?>
+                <section class="container section-testimonials">
+                    <p><?php echo get_sub_field("section_testimonials_headline"); ?></p>
+                    <div class="section-content bxslider">
+                        <?php
+                          while(has_sub_field('testimonials')):
+                            $image = get_sub_field('testimonial_image');
+                            $link = get_sub_field('testimonial_company_link');
+                        ?>
+                        <div class="testimonial">
+                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive testimonial-image" />
+                            <div class="item-content hasBg">
+                                <p class="oib-member"><?php echo get_sub_field("oib_member_info"); ?></p>
+                                <div class="hasBg-content hasBg-content<?php echo $i; ?>">
+                                    <p class="testimonial-content"><?php echo get_sub_field("testimonial"); ?></p>
+                                    <p class="testimonial-author"><?php echo get_sub_field("testimonial_author_info"); ?></p>
+                                    <p class="testimonial-author">
+                                        <?php
+                                            echo get_sub_field("testimonial_company");
+                                            if($link) {
+                                                echo "<span> | </span><a href='http://" . get_sub_field("testimonial_company_link") . "' target='_blank'>" . get_sub_field("testimonial_company_link") . "</a>";
+                                            }
+                                        ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endwhile; ?>
                     </div>
                 </section>
             <?php }

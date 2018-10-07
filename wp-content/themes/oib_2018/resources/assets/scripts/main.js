@@ -9,6 +9,7 @@ import Router from './util/Router';
 import "./util/isotope.pkgd.min";
 import "./util/jquery.infinitescroll";
 import "./util/manual-trigger";
+import "./bxslider/dist/jquery.bxslider.min"
 import common from './routes/common';
 import home from './routes/home';
 import aboutUs from './routes/about';

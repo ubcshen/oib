@@ -498,3 +498,71 @@ h4 {
 h4 {
   @include font-size-sass(16px);
 }
+
+.bx-wrapper {
+  border: 0;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  .bx-viewport {
+    height: inherit !important;
+  }
+  .bx-controls-direction a {
+    bottom: 27%;
+    top: auto;
+    background: none;
+    color: #ab9767;
+    font-size: 0;
+    text-indent: 0;
+    height: 50px;
+    width: 50px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .bx-next::before {
+    content: "\e801";
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0.2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @include font-size-sass(50px);
+  }
+  .bx-prev {
+    left: auto;
+    right: 70px;
+  }
+  .bx-prev::before {
+    content: "\e802";
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: 0.2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: 0.2em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @include font-size-sass(50px);
+  }
+  .bx-controls-direction a.disabled {
+    display: block;
+    opacity: 0.1;
+  }
+}
