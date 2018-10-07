@@ -43,6 +43,7 @@
       "selector-list-comma-newline-after": null,
       "declaration-block-no-duplicate-properties": null,
       "indentation": null,
+      "max-empty-lines": null,
       "at-rule-no-unknown": [
         true,
         {

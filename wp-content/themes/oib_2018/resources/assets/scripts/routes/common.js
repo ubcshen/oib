@@ -12,11 +12,11 @@ export default {
       $(".grid").isotope({
         itemSelector: ".element-item",
         layoutMode: "fitRows",
-        filter: filterValue,
+        filter: filterValue
       });
     });
 
-    $(window).load(function(){
+    $(window).load(function() {
       if ($(".fliter-btns-group").length) {
         $(".tab-active").trigger("click");
       }
@@ -32,13 +32,13 @@ export default {
             msgText: "",
             //img : 'data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
             //img: loadImg,
-            finishedMsg: "",
+            finishedMsg: ""
           },
           navSelector: "#wp_pagination",
           // selector for the paged navigation (it will be hidden)
           nextSelector: "#wp_pagination a.next:first",
           // selector for the NEXT link (to page 2)
-          itemSelector: ".element-item",
+          itemSelector: ".element-item"
           // selector for all items you'll retrieve
         });
       }
@@ -46,7 +46,7 @@ export default {
 
     initScroll();
 
-    $('.bxslider').bxSlider({
+    $(".bxslider").bxSlider({
       adaptiveHeight: false,
       controls: true,
       auto: false,
@@ -56,7 +56,7 @@ export default {
       pager: false,
       slideWidth: 1280,
       //pagerCustom: '#bx-pager'+(index),
-      touchEnabled: true,
+      touchEnabled: true
     });
 
     /*if ($(".fliter-btns-group").length) {
@@ -79,8 +79,17 @@ export default {
     };
 
     setTab();*/
+
+    $(".member-fancybox").click(function() {
+      var lightbox = $(this).attr("data-lightbox");
+      //console.log("."+lightbox);
+      $(lightbox).fancybox({
+        //type: "inline",
+        //href: lightbox
+      }).trigger("click");
+    });
   },
   finalize() {
     // JavaScript to be fired on all pages, after page specific JS is fired
-  },
+  }
 };
