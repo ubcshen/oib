@@ -16,6 +16,7 @@ import home from './routes/home';
 import aboutUs from './routes/about';
 //import archiveNews from './routes/post_type_archive_news';
 import newsroom from './routes/newsroom';
+import singleNews from './routes/singlenews';
 
 /** Populate Router instance with DOM routes */
 const routes = new Router({
@@ -26,6 +27,7 @@ const routes = new Router({
   // About Us page, note the change from about-us to aboutUs.
   aboutUs,
   newsroom,
+  singleNews,
 });
 
 // Load Events

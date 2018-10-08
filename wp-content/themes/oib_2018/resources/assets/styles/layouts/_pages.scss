@@ -34,6 +34,9 @@
       position: absolute;
       bottom: 40px;
     }
+    p {
+      padding: 20px 0 0;
+    }
   }
 }
 
@@ -46,6 +49,12 @@
   left: 50%;
   margin-left: -650px;
   padding: 60px 100px;
+  p {
+    padding: 0;
+    &.author-info {
+      padding-top: 30px;
+    }
+  }
 }
 
 .element-item {
@@ -53,10 +62,6 @@
     width: 390px;
     height: 240px;
   }
-}
-
-.author-info {
-  margin-top: 40px;
 }
 
 .section-margin-top {
@@ -233,7 +238,7 @@
     width: 100%;
     max-width: 945px;
     .oib-member {
-      background-color: rgba(171,151,103,0.8);
+      background-color: rgba(171, 151, 103, 0.8);
       padding: 15px 20px;
       color: #fff;
       @include font-size-sass(16px);
@@ -244,7 +249,7 @@
       background-color: #fff;
       padding: 60px 80px;
       background-image: url("./images/test_bg.jpg");
-      background-repeat:no-repeat;
+      background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
       -webkit-background-size: cover;
@@ -258,12 +263,12 @@
         font-style: italic;
         letter-spacing: -0.67px;
         line-height: 1.42;
-        font-family: 'Merriweather', serif;
+        font-family: "Merriweather", serif;
       }
       .testimonial-author {
         color: #fff;
         font-weight: 600;
-        margin-bottom:0;
+        margin-bottom: 0;
         span,
         a {
           color: inherit;
@@ -287,18 +292,18 @@
         @include font-size-sass(44px);
         font-weight: 700;
         color: #fff;
-        font-family: 'Merriweather', serif;
+        font-family: "Merriweather", serif;
         line-height: 1;
         letter-spacing: -0.67px;
       }
       &::before {
-        content: '“';
+        content: "“";
         position: absolute;
         top: 60px;
         left: 40px;
       }
       &::after {
-        content: '”';
+        content: "”";
         position: absolute;
         bottom: 40px;
         right: 40px;
@@ -373,6 +378,44 @@
       }
       &.member-fancybox:hover {
         cursor: pointer;
+      }
+    }
+  }
+}
+
+.single-news {
+  h1 {
+    max-width: 700px;
+    line-height: 1.28;
+  }
+  .author-info {
+    padding: 30px 0 0;
+  }
+  .entry-content {
+    border-top: 2px solid #d8d8d8;
+    overflow: hidden;
+    padding: 40px 0;
+    .inner-container {
+      max-width: 724px;
+      width: 100%;
+    }
+    .social {
+        i::before {
+        font-size: 36px;
+      }
+    }
+    .wp-caption-text {
+      @include font-size-sass(16px);
+      letter-spacing: 0;
+      line-height: 1.25;
+    }
+    .wp-caption img {
+      display: block;
+    }
+    .inner-container {
+      padding-left: 30px;
+      & > :first-child {
+        padding-top: 0;
       }
     }
   }

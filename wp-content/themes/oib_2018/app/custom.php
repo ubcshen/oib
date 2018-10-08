@@ -115,6 +115,15 @@ if( function_exists('acf_add_options_page') ) {
     'capability'  => 'activate_plugins',
     'redirect'    => false
   ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Social Media Sidebar Setting',
+    'menu_title'  => 'Social Media Sidebar Setting',
+    'menu_slug'   => 'social_media_sidebar_setting',
+    'parent_slug'   => $parent['menu_slug'],
+    'capability'  => 'activate_plugins',
+    'redirect'    => false
+  ));
 }
 
 if ( function_exists( 'add_theme_support' ) ) {

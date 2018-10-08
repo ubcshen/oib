@@ -63,6 +63,24 @@
       "search": [
         "right_arrow_active"
       ]
+    },
+    {
+      "uid": "17c21cd98db80e521e573eba247bd69b",
+      "css": "mail-squared",
+      "code": 61849,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "4c1f3c0b331d5f72c6a38d7bb7632675",
+      "css": "share-squared",
+      "code": 61921,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "f0cf7db1b03cb65adc450aa3bdaf8c4d",
+      "css": "gplus-squared",
+      "code": 61652,
+      "src": "fontawesome"
     }
   ]
 }
