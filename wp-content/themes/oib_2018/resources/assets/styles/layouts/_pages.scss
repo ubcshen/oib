@@ -96,8 +96,9 @@
 
 .grid {
   .element-item {
-    width: 390px;
+    max-width: 390px;
     margin: 30px 1%;
+    width: 32%;
     /*&:nth-child(3n-1) {
       margin: 30px 4%;
     }*/
@@ -119,6 +120,7 @@
       line-height: 1.25;
       @include font-size-sass(16px);
       margin-bottom: 30px;
+      padding: 0;
     }
     .author-info-item {
       font-weight: 600;
@@ -129,18 +131,33 @@
 }
 
 .section-tabs-system {
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 50px;
   .grid {
     padding: 10px 0 40px 0;
     .element-item {
       text-align: center;
       width: 100%;
       margin: 0;
-      padding: 0 8%;
+      //padding: 0;
+      max-width: none;
       h2 {
         margin-bottom: 15px;
       }
       p {
+        padding: 0;
         text-align: left;
+      }
+    }
+    .bx-wrapper {
+      margin: 30px auto;
+      .item-content {
+        padding: 0;
+      }
+      .bx-controls-direction a {
+        bottom: 16%;
+        color: #1c1c1c;
       }
     }
   }
@@ -219,17 +236,22 @@
           margin: 15px 0;
           @include font-size-sass(20px);
         }
+        h4 a.cta-brown {
+          @include font-size-sass(16px);
+        }
         p {
           line-height: 1.25;
           @include font-size-sass(16px);
           margin-bottom: 30px;
+          padding: 0;
         }
       }
     }
   }
 }
 
-.section-testimonials {
+.section-testimonials,
+.testimonials {
   .item-content {
     margin: -10% auto 0;
     z-index: 2;
@@ -264,11 +286,13 @@
         letter-spacing: -0.67px;
         line-height: 1.42;
         font-family: "Merriweather", serif;
+        padding: 0;
       }
       .testimonial-author {
         color: #fff;
         font-weight: 600;
         margin-bottom: 0;
+        padding: 0;
         span,
         a {
           color: inherit;
@@ -374,6 +398,7 @@
           line-height: 1.25;
           @include font-size-sass(16px);
           margin-bottom: 30px;
+          padding: 0;
         }
       }
       &.member-fancybox:hover {
@@ -400,7 +425,7 @@
       width: 100%;
     }
     .social {
-        i::before {
+      i::before {
         font-size: 36px;
       }
     }
@@ -419,8 +444,51 @@
       }
     }
     .sidebar {
+      max-width: 280px;
+      .sidebar-subscribe {
+        background-color: #b0291c;
+        margin-bottom: 20px;
+        padding: 40px 15px 0;
+        h4 {
+          color: #fff;
+          letter-spacing: -0.67px;
+          @include font-size-sass(24px);
+          line-height: 1.25;
+          text-transform: unset;
+        }
+      }
       a {
         display: block;
+        padding: 20px 0;
+      }
+    }
+  }
+}
+
+.related-news {
+  border-top: 2px solid #d8d8d8;
+  padding: 70px 0 150px;
+  h2 {
+    text-align: center;
+  }
+  .item-content {
+    z-index: 2;
+    position: relative;
+    text-align: left;
+  }
+  .item img {
+    position: relative;
+    z-index: 0;
+  }
+  .grid {
+    text-align: center;
+    .element-item {
+      margin: 50px 2%;
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
       }
     }
   }

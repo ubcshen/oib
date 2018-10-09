@@ -41,4 +41,48 @@ if ( ! empty( $categories ) ) {
     </div>
   </div>
   @php comments_template('/partials/comments.blade.php') @endphp
+  <div class="related-news container">
+    <h2>Related Articles</h2>
+    <div class="related-news-container">
+      <div class="grid">
+        <?php
+          wp_reset_postdata(); wp_reset_query();
+          $temp_tax_query[] = array(
+            'taxonomy' => 'news-filter',
+            'field'    => 'name',
+            'terms'    => $category,//wp_get_post_terms($post->ID, 'landing-page-templates', array("fields" => "names")),
+          );
+          $currentId[] = $post->ID;
+          $args = array(
+            'post_type'=>'news',
+            'post_status' => 'publish',
+            'posts_per_page'=>3,
+            'orderby' => 'rand',
+            'post__not_in' => $currentId,
+            'tax_query'=> $temp_tax_query
+          );
+        $the_query = new WP_Query( $args );
+        if( $the_query->have_posts() ) { $i = 0;
+          while ( $the_query->have_posts() ): $the_query->the_post();
+            $image = wp_get_attachment_image_src(get_post_thumbnail_id($the_query->post->ID), "news-thumbnail");
+            $categories = get_the_terms( $the_query->post->ID , 'news-filter' );
+            $category = 'news';
+            if ( ! empty( $categories ) ) {
+              $category = esc_html( $categories[0]->name );
+            }
+        ?>
+        <div class="inline element-item <?php echo $cat->slug; ?>">
+          <div class="item">
+              <img src="<?php echo $image[0]; ?>" alt="<?php echo get_the_title($the_query->post->ID); ?>" width="<?php echo $image[1]; ?>" height="<?php echo $image[2]; ?>" class="img-responsive" />
+              <div class="item-content">
+                  <h4><?php echo $category; ?></h4>
+                  <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title($the_query->post->ID); ?></a>
+                  <p><?php echo get_the_excerpt($the_query->post->ID); ?></p>
+              </div>
+          </div>
+        </div>
+        <?php $i++; endwhile; } ?>
+      </div>
+    </div>
+  </div>
 </article>

@@ -314,7 +314,38 @@ function build_sections()
                             $tab = strtolower(get_sub_field("tab"));
                             $tab = preg_replace('/\s+/', '_', $tab);
                         ?>
-                        <div class="<?php echo $tab; ?> element-item"><?php echo get_sub_field("tab_section"); ?></div>
+                        <div class="<?php echo $tab; ?> element-item">
+                            <div class="inner-container"><?php echo get_sub_field("tab_section"); ?></div>
+                            <?php if(get_sub_field("has_slider")) { ?>
+                            <div class="testimonials bxslider">
+                                <?php
+                                  while(has_sub_field('tab_testimonial_system')):
+                                    $image = get_sub_field('tab_testimonial_image');
+                                    $link = get_sub_field('tab_testimonial_company_link');
+                                ?>
+                                <div class="testimonial">
+                                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive testimonial-image" />
+                                    <div class="item-content hasBg">
+                                        <div class="hasBg-content">
+                                            <div class="hasBg-content-padding">
+                                                <p class="testimonial-content"><?php echo get_sub_field("tab_testimonial"); ?></p>
+                                                <p class="testimonial-author"><?php echo get_sub_field("tab_testimonial_author_info"); ?></p>
+                                                <p class="testimonial-author">
+                                                    <?php
+                                                        echo get_sub_field("tab_testimonial_company");
+                                                        if($link) {
+                                                            echo "<span> | </span><a href='http://" . $link . "' target='_blank'>" . $link . "</a>";
+                                                        }
+                                                    ?>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <?php endwhile; ?>
+                             </div>
+                            <?php } ?>
+                        </div>
                         <?php endwhile; ?>
                     </div>
                 </section>
@@ -377,12 +408,14 @@ function build_sections()
                           while(has_sub_field('cols')):
                             $image = get_sub_field('col_image');
                             $newTab = get_sub_field('open_new_tab');
+                            $colTitleLink = get_sub_field('col_title_link');
+                            $colHeadlineLink = get_sub_field('col_headline_link');
                         ?>
                         <div class="col">
                             <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive col--<?php echo $colNo; ?>" />
                             <div class="item-content">
-                                <h4><?php echo get_sub_field("col_title"); ?></h4>
-                                <a href="<?php echo get_sub_field("col_link"); ?>" class="cta-brown" target="<?php if($newTab) { echo '_blank'; } else { echo '_self'; } ?>"><?php echo get_sub_field("col_headline"); ?></a>
+                                <h4><a href="<?php echo $colTitleLink; ?>" class="cta-brown" target="<?php if($newTab) { echo '_blank'; } else { echo '_self'; } ?>"><?php echo get_sub_field("col_title"); ?></a></h4>
+                                <a href="<?php echo $colHeadlineLink; ?>" class="cta-brown" target="<?php if($newTab) { echo '_blank'; } else { echo '_self'; } ?>"><?php echo get_sub_field("col_headline"); ?></a>
                                 <p><?php echo get_sub_field("col_content"); ?></p>
                             </div>
                         </div>
@@ -405,16 +438,18 @@ function build_sections()
                             <div class="item-content hasBg">
                                 <p class="oib-member"><?php echo get_sub_field("oib_member_info"); ?></p>
                                 <div class="hasBg-content hasBg-content<?php echo $i; ?>">
-                                    <p class="testimonial-content"><?php echo get_sub_field("testimonial"); ?></p>
-                                    <p class="testimonial-author"><?php echo get_sub_field("testimonial_author_info"); ?></p>
-                                    <p class="testimonial-author">
-                                        <?php
-                                            echo get_sub_field("testimonial_company");
-                                            if($link) {
-                                                echo "<span> | </span><a href='http://" . get_sub_field("testimonial_company_link") . "' target='_blank'>" . get_sub_field("testimonial_company_link") . "</a>";
-                                            }
-                                        ?>
-                                    </p>
+                                    <div class="hasBg-content-padding">
+                                        <p class="testimonial-content"><?php echo get_sub_field("testimonial"); ?></p>
+                                        <p class="testimonial-author"><?php echo get_sub_field("testimonial_author_info"); ?></p>
+                                        <p class="testimonial-author">
+                                            <?php
+                                                echo get_sub_field("testimonial_company");
+                                                if($link) {
+                                                    echo "<span> | </span><a href='http://" . get_sub_field("testimonial_company_link") . "' target='_blank'>" . get_sub_field("testimonial_company_link") . "</a>";
+                                                }
+                                            ?>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

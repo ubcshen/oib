@@ -618,6 +618,7 @@ h5 {
   .pic-credit {
     @include font-size-sass(16px);
     line-height: 1.25;
+    padding: 0;
   }
   img {
     width: 600px;
@@ -629,7 +630,6 @@ h5 {
     max-width: 600px;
     @include font-size-sass(20px);
     line-height: 1.8;
-    margin-top: 40px;
   }
 }
 
