@@ -641,3 +641,12 @@ h5 {
   width: auto;
   outline: none;
 }
+
+.wp-caption-text {
+  @include font-size-sass(16px);
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+.wp-caption img {
+  display: block;
+}
