@@ -387,7 +387,7 @@ function build_sections()
                             <div class="fLeft banner-content">
                                 <?php if(get_sub_field("banner_lightbox_video")) { ?>
                                     <div class="video-btn">
-                                        <a href="">Watch Video</a>
+                                        <a class="various fancyboxVideo fancybox.iframe" href="https://www.youtube.com/embed/<?php echo get_sub_field("banner_lightbox_video"); ?>?autoplay=1"">Watch Video</a>
                                     </div>
                                 <?php } ?>
                                 <h1><?php echo get_sub_field("banner_header"); ?></h1>

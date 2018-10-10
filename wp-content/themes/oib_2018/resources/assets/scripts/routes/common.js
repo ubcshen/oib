@@ -95,6 +95,14 @@ export default {
         },
       }).trigger("click");
     });
+
+    $(".fancyboxVideo").fancybox({
+        maxWidth    : 800,
+        maxHeight   : 600,
+        closeClick  : false,
+        openEffect  : 'none',
+        closeEffect : 'none'
+    });
   },
   finalize() {
     // JavaScript to be fired on all pages, after page specific JS is fired
