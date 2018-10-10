@@ -1,0 +1,14 @@
+.btn {
+  border: 4px solid #ab9767;
+  padding: 0.825rem 2.825rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #ab9767;
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+  .icon-right-big {
+    color: inherit;
+  }
+}

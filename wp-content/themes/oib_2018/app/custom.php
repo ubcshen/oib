@@ -290,10 +290,16 @@ function build_sections()
                 </section>
             <?php }
             elseif( get_row_layout() == "section_subscribe" ) // layout: Section Subscribe
-            { ?>
+            {
+                load_Img(".section-subscribe", "section_subscribe_background_image");
+                $image = get_sub_field('section_subscribe_book_image');
+            ?>
                 <section class="container section-subscribe">
-                    <h2><?php echo get_sub_field("section_subscribe_title"); ?></h2>
-                    <div class="section-content"><?php echo get_sub_field("section_subscribe_content"); ?></div>
+                    <div class="sub_container">
+                        <h2><?php echo get_sub_field("section_subscribe_title"); ?></h2>
+                        <div class="section-content"><?php echo get_sub_field("section_subscribe_content"); ?></div>
+                    </div>
+                    <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive sub-img" />
                 </section>
             <?php }
             elseif( get_row_layout() == "section_tab_system" ) // layout: Section Tabs
@@ -495,6 +501,52 @@ function build_sections()
                         </div>
                         <?php $i++; endforeach; wp_reset_postdata(); endif; ?>
                     </div>
+                </section>
+            <?php }
+            elseif( get_row_layout() == "section_news" && get_sub_field("load_news")) // layout: Section Intro
+            { ?>
+                <section class="section-news container">
+                  <div class="tabs">
+                    <?php
+                      global $paged;
+                      if ( get_query_var('paged') ) { $paged = get_query_var('paged'); } else if ( get_query_var('page') ) {$paged = get_query_var('page'); } else {$paged = 1; }
+                      $args = array(
+                        'post_type'=>'news',
+                        'post_status' => 'publish',
+                        'posts_per_page'=>6,
+                        'orderby'=>'date',
+                      );
+                      $the_query = new WP_Query( $args );
+                      if( $the_query->have_posts() ) {
+                    ?>
+                    <div class="grid">
+                      <?php $i = 0;
+                        while ( $the_query->have_posts() ): $the_query->the_post();
+                          foreach (get_the_terms(get_the_ID(), 'news-filter') as $cat) {
+                            //$img=wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'news-thumbnail' );
+                      ?>
+                        <div class="inline element-item <?php echo $cat->slug; ?>">
+                          <?php load_Feature_Img_Item(".item-" . $i, get_the_ID(), "news-thumbnail"); ?>
+                          <div class="item item-<?php echo $i; ?>"></div>
+                          <!--<img src="<?php echo $img[0]; ?>" width="<?php echo $img[1]; ?>" height="<?php echo $img[2]; ?>" alt="news featured image" class="img-responsive featured-image" /> -->
+                          <?php
+                            $categories = get_the_terms( get_the_ID(), 'news-filter' );
+                            $category = 'news';
+                            if ( ! empty( $categories ) ) {
+                              $category = esc_html( $categories[0]->name );
+                            }
+                          ?>
+                          <div class="item-content">
+                            <h4><?php echo $category; ?></h4>
+                            <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title(); ?></a>
+                            <p><?php echo get_the_excerpt(); ?></p>
+                            <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
+                          </div>
+                        </div>
+                      <?php } $i++; endwhile; wp_reset_postdata(); } ?>
+                    </div>
+                  </div>
+                  <div class="find_more"><a href="<?php echo get_sub_field("find_more_link"); ?>" class="btn"><?php echo get_sub_field("find_more_btn"); ?> <i class="icon-right-big"></i></a>
                 </section>
             <?php }
         }

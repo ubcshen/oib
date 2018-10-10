@@ -145,6 +145,7 @@
       font-weight: 600;
       color: #ab9767;
       text-transform: capitalize;
+      margin-bottom: 0;
     }
   }
 }
@@ -465,7 +466,7 @@
       }
     }
     .inner-container {
-      padding-left: 30px;
+      //padding-left: 30px;
       & > :first-child {
         padding-top: 0;
       }
@@ -518,5 +519,30 @@
         margin-right: 0;
       }
     }
+  }
+}
+
+.home {
+  .section-html {
+    padding-bottom: 10px;
+  }
+}
+
+.section-subscribe {
+  position: relative;
+  h2 {
+    color: #fff;
+  }
+  .section-content {
+    color: #fff;
+    margin-top: 0;
+    max-width: 646px;
+  }
+  padding: 50px 110px;
+  margin: 150px auto;
+  .sub-img {
+    position: absolute;
+    top: -35%;
+    right: 110px;
   }
 }

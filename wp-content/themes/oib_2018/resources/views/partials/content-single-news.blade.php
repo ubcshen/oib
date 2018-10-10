@@ -16,13 +16,6 @@ if ( ! empty( $categories ) ) {
 </section>
 <article @php post_class("section-margin-top") @endphp>
   <div class="entry-content container">
-    <div class="socialBar fLeft">
-      <?php
-        while(has_sub_field('social_medias_info', 'option')):
-      ?>
-      <div class="social"><i class="<?php echo get_sub_field('social_media_info_icon', 'option'); ?>"></i></div>
-      <?php endwhile; ?>
-    </div>
     <div class="inner-container fLeft">
       @php the_content() @endphp
     </div>
