@@ -38,6 +38,13 @@
       padding: 20px 0 0;
     }
   }
+  .banner {
+    .container {
+      display: block;
+      vertical-align: initial;
+      margin-top: 0;
+    }
+  }
 }
 
 .white-bg.banner-content {
@@ -525,6 +532,12 @@
 .home {
   .section-html {
     padding-bottom: 10px;
+  }
+  .section-banner {
+    height: 807px;
+    .valign-center {
+      @include calc(height, '100% - 360px');
+    }
   }
 }
 

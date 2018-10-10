@@ -3,6 +3,7 @@ export default {
     // JavaScript to be fired on all pages
     $(".icon-cancel-circled").click(function() {
       $(".topbar").addClass("hiddenTop");
+      $(".hiddenTop .container").hide();
     });
 
     $(".tab").click(function() {

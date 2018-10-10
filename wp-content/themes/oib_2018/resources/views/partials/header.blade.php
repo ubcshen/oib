@@ -18,6 +18,7 @@
     <div class="container">{{ the_field('topbar_content', 'option') }}</div>
   </section>
 <?php } ?>
+<?php if(!is_front_page()) { ?>
 <header class="banner">
   <div class="container">
     <a class="brand inline" href="{{ home_url('/') }}">
@@ -31,3 +32,4 @@
     </nav>
   </div>
 </header>
+<?php }

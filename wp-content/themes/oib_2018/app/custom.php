@@ -365,7 +365,23 @@ function build_sections()
             elseif( get_row_layout() == "section_banner" ) // layout: Section Banner
             { ?>
                 <?php load_Img(".section-banner", "banner_background_image"); ?>
-                <section class="section-banner normalHeight valign-center">
+                <section class="section-banner normalHeight <?php if(!is_front_page()) { echo 'valign-center'; } ?>">
+                    <?php if(is_front_page()) { ?>
+                        <header class="banner">
+                          <div class="container">
+                            <a class="brand inline" href="{{ home_url('/') }}">
+                              <?php $image = get_field('header_logo_home_page', 'option'); ?>
+                              <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="115" height="140" class="img-responsive" />
+                            </a>
+                            <nav class="nav-primary inline">
+                              <?php if (has_nav_menu('primary_navigation'))
+                                { wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav']); }
+                              ?>
+                            </nav>
+                          </div>
+                        </header>
+                    <?php } ?>
+                    <?php if(is_front_page()) { ?><div class="valign-center"><?php } ?>
                     <div class="container">
                         <div class="inner-container">
                             <div class="fLeft banner-content">
@@ -382,6 +398,7 @@ function build_sections()
                             </div>
                         </div>
                     </div>
+                    <?php if(is_front_page()) { ?></div><?php } ?>
                 </section>
             <?php }
             elseif( get_row_layout() == "section_intro" ) // layout: Section Intro
