@@ -502,6 +502,7 @@ hr.short {
   /*position: absolute;
   right: 0;
   bottom: 0;*/
+  margin-top: 4.5%;
   .medium.cli-plugin-button.cli-plugin-button.cookie_action_close_header_reject {
     background-color: transparent !important;
     font-weight: 600;
@@ -681,4 +682,12 @@ h5 {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+}
+
+.video-btn {
+  margin-bottom: 5px;
+}
+
+.inner-tabs {
+  overflow: hidden;
 }

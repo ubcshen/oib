@@ -294,7 +294,7 @@ function build_sections()
                 load_Img(".section-subscribe", "section_subscribe_background_image");
                 $image = get_sub_field('section_subscribe_book_image');
             ?>
-                <section class="container section-subscribe">
+                <section class="container section-subscribe" id="section-subscribe">
                     <div class="sub_container">
                         <h2><?php echo get_sub_field("section_subscribe_title"); ?></h2>
                         <div class="section-content"><?php echo get_sub_field("section_subscribe_content"); ?></div>
@@ -305,12 +305,14 @@ function build_sections()
             elseif( get_row_layout() == "section_tab_system" ) // layout: Section Tabs
             {
                 $tabAlignment = get_sub_field("tab_position");
+                $hasDouble = get_sub_field("enable_double_filters");
+                if(!$hasDouble) {
                 ?>
                 <section class="container section-tabs-system <?php if($tabAlignment=="vertical") echo "hasBorder"; ?>">
                     <?php if($tabAlignment=="vertical") {?><div class="inner-container"><?php } ?>
                         <div class="fliter-btns-group <?php if($tabAlignment=="vertical") echo "fliter-btns-group-alignV fLeft"; ?>">
                             <?php if($tabAlignment=="vertical") {?>
-                            <h3>OIBDC BUSINESS PARTNERSHIPS:</h3>
+                            <h3><?php echo get_sub_field("tab_vertical_headline"); ?></h3>
                           <?php } $i = 0;
                             while(has_sub_field('section_tabs')):
                                 $tab = strtolower(get_sub_field("tab"));
@@ -361,6 +363,49 @@ function build_sections()
                         </div>
                     <?php if($tabAlignment=="vertical") {?></div><?php } ?>
                 </section>
+                <?php } else { ?>
+                    <section class="container section-tabs-system">
+                            <div class="fliter-btns-group">
+                              <?php $i = 0;
+                                while(has_sub_field('double_filters_layout')):
+                                    $tab = strtolower(get_sub_field("horizontal_tab"));
+                                    $tab = preg_replace('/\s+/', '_', $tab);
+                              ?>
+                              <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("horizontal_tab"); ?></div>
+                              <?php $i++; endwhile; ?>
+                            </div>
+                            <div class="grid section-content inner-container">
+                                <?php while(has_sub_field('double_filters_layout')):
+                                    $tab = strtolower(get_sub_field("horizontal_tab"));
+                                    $tab = preg_replace('/\s+/', '_', $tab);
+                                ?>
+                                <div class="<?php echo $tab; ?> inner-tabs element-item">
+                                    <div class="fliter-btns-group-inner fliter-btns-group-alignV fLeft">
+                                        <h3><?php echo get_sub_field("vertical_tab_headline"); ?></h3>
+                                        <?php $j = 0;
+                                          while(has_sub_field('horizontal_tab_content')):
+                                            $tabV = strtolower(get_sub_field("vertical_tab"));
+                                            $tabV = preg_replace('/\s+/', '_', $tabV);
+                                        ?>
+                                        <div class="inline inner-tab <?php if($j==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tabV; ?>"><?php echo get_sub_field("vertical_tab"); ?></div>
+                                        <?php $j++; endwhile; ?>
+                                    </div>
+                                    <div class="grid-inner section-content grid-alignV fRight">
+                                        <?php
+                                          while(has_sub_field('horizontal_tab_content')):
+                                            $tabV = strtolower(get_sub_field("vertical_tab"));
+                                            $tabV = preg_replace('/\s+/', '_', $tabV);
+                                        ?>
+                                        <div class="<?php echo $tab; ?> <?php echo $tabV; ?> element-item-inner">
+                                            <div class="inner-container"><?php echo get_sub_field("vertical_tab_content"); ?></div>
+                                        </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                </div>
+                                <?php endwhile; ?>
+                            </div>
+                    </section>
+                <?php } ?>
             <?php }
             elseif( get_row_layout() == "section_banner" ) // layout: Section Banner
             { ?>

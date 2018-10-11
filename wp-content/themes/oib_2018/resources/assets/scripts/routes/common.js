@@ -14,13 +14,51 @@ export default {
         itemSelector: ".element-item",
         layoutMode: "fitRows",
         filter: filterValue
+        //filter: ".tourism, .oib_development"
+      });
+      if ($(".fliter-btns-group-inner").length) {   /* for business page or any page has a double filters */
+        var innerFilter = $(filterValue).find(".inner-tab:first");
+        $(innerFilter).addClass("tab-active");
+        $(innerFilter).trigger("click");
+        $(".grid").isotope({
+          itemSelector: ".element-item",
+          layoutMode: "fitRows",
+          filter: filterValue
+          //filter: ".tourism, .oib_development"
+        });
+      }
+    });
+
+
+
+    $(".inner-tab").click(function() {
+      $(".inner-tab").removeClass("tab-active");
+      $(this).addClass("tab-active");
+      var filterValue = $(this).attr("data-filter");
+      $(".grid-inner").isotope({
+        itemSelector: ".element-item-inner",
+        layoutMode: "fitRows",
+        filter: filterValue
       });
     });
 
     $(window).load(function() {
-      if ($(".fliter-btns-group").length) {
-        $(".tab-active").trigger("click");
+      if ($(".fliter-btns-group-inner").length) {
+        $(".fliter-btns-group-inner").each(function( index ) {
+          $(this).find(".tab-active").trigger("click");
+        });
+        $(".tab-active:not(.inner-tab)").trigger("click");
+
+        //$(".tab-active:not(.inner-tab)").trigger("click");
+        //$(".inner-tab.tab-active").trigger("click");
+      } else {
+        if ($(".fliter-btns-group").length) {
+          $(".tab-active:not(.inner-tab)").trigger("click");
+        }
       }
+      /*if ($(".inner-tab").length) {
+        $(".inner-tab.tab-active").trigger("click");
+      }*/
     });
 
     var initScroll = function() {
@@ -102,6 +140,32 @@ export default {
         closeClick  : false,
         openEffect  : 'none',
         closeEffect : 'none'
+    });
+
+    if( $(".banner").offset().top > 0 ) {
+      $(".banner").addClass("fixed");
+    }
+    else {
+      $(".banner").removeClass("fixed");
+    }
+
+    $('a.anchor[href*="#"]:not([href="#"])').click(function() {
+      if (
+        location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') &&
+        location.hostname === this.hostname
+      ) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+        if (target.length) {
+          $('html, body').animate(
+            {
+              scrollTop: target.offset().top - 50
+            },
+            1000
+          );
+          return false;
+        }
+      }
     });
   },
   finalize() {

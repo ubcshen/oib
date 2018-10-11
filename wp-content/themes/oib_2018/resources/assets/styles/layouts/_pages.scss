@@ -120,6 +120,51 @@
   }
 }
 
+.fliter-btns-group-inner {
+  border-top: 2px solid #d8d8d8;
+  border-bottom: 2px solid #d8d8d8;
+  text-align: center;
+  padding: 25px 0;
+  margin-bottom: 30px;
+  .inner-tab {
+    @include font-size-sass(16px);
+    padding: 0 20px;
+    font-weight: 600;
+    color: #ab9767;
+    &.tab-active {
+      color: #b0291c;
+    }
+    &:hover {
+      cursor: pointer;
+    }
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+  &.fliter-btns-group-alignV {
+    border: none;
+    display: block;
+    padding: 0;
+    margin-bottom: 0;
+    text-align: left;
+    max-width: 280px;
+    h3 {
+      @include font-size-sass(16px);
+      font-weight: 700;
+      color: #ab9767;
+      margin-bottom: 15px;
+    }
+    .inner-tab {
+      padding: 3px 0;
+      display: block;
+      font-weight: 400;
+    }
+  }
+}
+
 .grid {
   .element-item {
     max-width: 390px;
@@ -128,6 +173,40 @@
     /*&:nth-child(3n-1) {
       margin: 30px 4%;
     }*/
+  }
+  .item-content {
+    margin: -50px 20px 0;
+    background-color: #fff;
+    padding: 30px;
+    -webkit-box-shadow: 0px 3px 90px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0px 3px 90px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 3px 90px 0px rgba(0, 0, 0, 0.3);
+    .cta-brown {
+      line-height: 1.2;
+      display: block;
+      text-transform: capitalize;
+      margin: 15px 0;
+    }
+    p {
+      line-height: 1.25;
+      @include font-size-sass(16px);
+      margin-bottom: 30px;
+      padding: 0;
+    }
+    .author-info-item {
+      font-weight: 600;
+      color: #ab9767;
+      text-transform: capitalize;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.grid-inner {
+  .element-item-inner {
+    max-width: 390px;
+    margin: 30px 1%;
+    width: 32%;
   }
   .item-content {
     margin: -50px 20px 0;
@@ -203,6 +282,34 @@
   &.hasBorder {
     border-top: 2px solid #d8d8d8;
     padding-top: 70px;
+  }
+  .grid-inner {
+    .element-item-inner {
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      //padding: 0;
+      max-width: none;
+      h2 {
+        margin-bottom: 15px;
+      }
+      p {
+        padding: 0;
+        text-align: left;
+      }
+    }
+    &.grid-alignV {
+      @include calc(width, '100% - 280px');
+      padding-left: 50px;
+      .inner-container {
+        text-align: left;
+      }
+      padding-top: 0;
+      margin-top: 0;
+      .element-item p {
+        padding: 30px 0;
+      }
+    }
   }
 }
 
