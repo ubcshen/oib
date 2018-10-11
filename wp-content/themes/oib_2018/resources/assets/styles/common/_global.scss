@@ -11,154 +11,6 @@
   text-rendering: optimizeLegibility;
 }
 
-html,
-body,
-div,
-span,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-pre,
-abbr,
-address,
-cite,
-code,
-del,
-dfn,
-img,
-ins,
-kbd,
-q,
-samp,
-small,
-sub,
-sup,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td,
-article,
-aside,
-canvas,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section,
-summary,
-time,
-mark,
-audio,
-video,
-i,
-b,
-em,
-strong,
-blockquote {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  vertical-align: baseline;
-  background: transparent;
-  font-family: $default-font;
-  font-weight: 400;
-  //font-style: normal;
-  font-size: 20px;
-  color: $default-font-color;
-  @extend %fix-webkit-font-rendering;
-  line-height: 1.8;
-  letter-spacing: -0.56px;
-}
-
-div,
-h2,
-h3 {
-  color: #444;
-}
-body {
-  line-height: 1;
-}
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
-  display: block;
-}
-nav ul {
-  list-style: none;
-}
-blockquote,
-q {
-  quotes: none;
-}
-blockquote::before,
-blockquote::after,
-q::before,
-q::after {
-  content: "";
-  content: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  border: 0;
-}
-
-h1,
-h2 {
-  font-weight: 600;
-}
-
-h1 {
-  @include font-size-sass(36px);
-  color: $h-font-color;
-  a {
-    color: #b0291c;
-  }
-}
-
-html {
-  // Prevent font scaling in landscape while allowing user zoom
-  -webkit-text-size-adjust: 100%;
-}
-
-p {
-  padding: 30px 0;
-}
-
 @mixin breakpoint($point) {
   @if $point == large2000-up {
     @media (min-width: 2000px) {
@@ -391,6 +243,157 @@ p {
   }
 }
 
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+pre,
+abbr,
+address,
+cite,
+code,
+del,
+dfn,
+img,
+ins,
+kbd,
+q,
+samp,
+small,
+sub,
+sup,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+i,
+b,
+em,
+strong,
+blockquote {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent;
+  font-family: $default-font;
+  font-weight: 400;
+  //font-style: normal;
+  font-size: 20px;
+  color: $default-font-color;
+  @extend %fix-webkit-font-rendering;
+  line-height: 1.8;
+  letter-spacing: -0.56px;
+  @include breakpoint(medium1200-down) {
+    font-size: 17px;
+  }
+}
+
+div,
+h2,
+h3 {
+  color: #444;
+}
+body {
+  line-height: 1;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+nav ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: "";
+  content: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0;
+}
+
+h1,
+h2 {
+  font-weight: 600;
+}
+
+h1 {
+  @include font-size-sass(36px);
+  color: $h-font-color;
+  a {
+    color: #b0291c;
+  }
+}
+
+html {
+  // Prevent font scaling in landscape while allowing user zoom
+  -webkit-text-size-adjust: 100%;
+}
+
+p {
+  padding: 30px 0;
+}
+
 *::before,
 *::after {
   -webkit-box-sizing: border-box;
@@ -425,6 +428,9 @@ p {
 .container {
   @include breakpoint(medium1200-up) {
     max-width: 1300px;
+  }
+  @include breakpoint(medium1200-down) {
+    max-width: 1100px;
   }
 }
 
@@ -665,7 +671,7 @@ h5 {
   color: #fff;
   font-weight: 600;
   &::before {
-    content: "\e804";
+    content: url("./images/playBtn.png");
     font-family: "fontello";
     font-style: normal;
     font-weight: normal;
@@ -681,6 +687,8 @@ h5 {
     margin-left: 0.2em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    vertical-align: middle;
+    margin-right: 1.625rem;
   }
 }
 
@@ -690,4 +698,29 @@ h5 {
 
 .inner-tabs {
   overflow: hidden;
+}
+
+.anchor {
+  padding-left: 10px;
+}
+
+.hasTopbar {
+  border-top: 2px solid #ab9767;
+}
+
+.video-background {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.video-foreground,
+.video-background iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }

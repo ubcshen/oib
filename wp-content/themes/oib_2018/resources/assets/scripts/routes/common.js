@@ -98,6 +98,23 @@ export default {
       touchEnabled: true
     });
 
+    /*if( $(".banner").offset().top > 0 ) {
+      $(".banner").addClass("fixed");
+    }
+    else {
+      $(".banner").removeClass("fixed");
+    }*/
+
+    $(window).scroll(function (event) {
+      var scroll = $(window).scrollTop();
+      if(scroll>110) {
+        $(".banner").addClass("fixed");
+      }
+      else {
+        $(".banner").removeClass("fixed");
+      }
+    });
+
     /*if ($(".fliter-btns-group").length) {
       $(".fliter-btns-group .tab").first().trigger("click");
     }*/
@@ -142,7 +159,7 @@ export default {
         closeEffect : 'none'
     });
 
-    if( $(".banner").offset().top > 0 ) {
+    if( $(".banner").offset().top > 110 ) {
       $(".banner").addClass("fixed");
     }
     else {

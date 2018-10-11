@@ -93,6 +93,20 @@
       "css": "play-circled2",
       "code": 59396,
       "src": "fontawesome"
+    },
+    {
+      "uid": "0fef7a8e7db17bf486c21a12a1461229",
+      "css": "play-btn",
+      "code": 59397,
+      "src": "custom_icons",
+      "selected": true,
+      "svg": {
+        "path": "M563.7 362.7C587.3 377.4 587.3 401.1 563.7 415.8L484.7 464.8C461 479.5 441.9 471.3 441.9 446.5L441.9 332C441.9 307.2 461 299 484.7 313.7L563.7 362.7Z",
+        "width": 1000
+      },
+      "search": [
+        "play-btn"
+      ]
     }
   ]
 }

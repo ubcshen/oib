@@ -268,7 +268,7 @@ function build_sections()
             {
                 $contentAlignement = get_sub_field("text_alignment");
             ?>
-                <section class="container section-html" style="text-align: <?php echo $contentAlignement; ?>">
+                <section class="container section-html <?php if(get_sub_field("has_top_border")) { echo 'hasTopbar'; } ?>" style="text-align: <?php echo $contentAlignement; ?>">
                     <div class="inner-container">
                         <?php echo get_sub_field("html_field"); ?>
                     </div>
@@ -414,7 +414,7 @@ function build_sections()
                     <?php if(is_front_page()) { ?>
                         <header class="banner">
                           <div class="container">
-                            <a class="brand inline" href="{{ home_url('/') }}">
+                            <a class="brand inline" href="/">
                               <?php $image = get_field('header_logo_home_page', 'option'); ?>
                               <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="115" height="140" class="img-responsive" />
                             </a>
@@ -425,8 +425,16 @@ function build_sections()
                             </nav>
                           </div>
                         </header>
+                        <?php if(get_sub_field("banner_background_video")) { ?>
+                        <div class="video-background">
+                            <div class="video-foreground">
+                              <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autoplay=1&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                            </div>
+                        </div>
+                        <?php } ?>
                     <?php } ?>
-                    <?php if(is_front_page()) { ?><div class="valign-center"><?php } ?>
+                    <?php if(is_front_page()) { ?>
+                    </style><div class="valign-center"><?php } ?>
                     <div class="container">
                         <div class="inner-container">
                             <div class="fLeft banner-content">
@@ -500,7 +508,7 @@ function build_sections()
             elseif( get_row_layout() == "section_testimonials" ) // layout: Section Testimonials
             { ?>
                 <section class="container section-testimonials">
-                    <p><?php echo get_sub_field("section_testimonials_headline"); ?></p>
+                    <div class="inner-container"><?php echo get_sub_field("section_testimonials_headline"); ?></div>
                     <div class="section-content bxslider">
                         <?php
                           while(has_sub_field('testimonials')):
@@ -535,7 +543,7 @@ function build_sections()
             {
                 $enableLightbox = get_sub_field("enable_lightbox");
                 ?>
-                <section class="container section-select-members">
+                <section class="container section-select-members <?php if(get_sub_field("has_topborder")) { echo 'hasTopbar'; } ?>">
                     <h2><?php echo get_sub_field("section_select_members_title"); ?></h2>
                     <div class="members">
                     <?php
