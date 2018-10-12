@@ -232,6 +232,10 @@
     @media (max-width: 380px) {
       @content;
     }
+  } @else if $point == small374-down {
+    @media (max-width: 374px) {
+      @content;
+    }
   } @else if $point == small370-down {
     @media (max-width: 370px) {
       @content;
@@ -328,6 +332,9 @@ blockquote {
   @include breakpoint(medium1200-down) {
     font-size: 17px;
   }
+  @include breakpoint(medium750-down) {
+    font-size: 16px;
+  }
 }
 
 div,
@@ -383,6 +390,11 @@ h1 {
   a {
     color: #b0291c;
   }
+  @include breakpoint(medium750-down) {
+    @include font-size-sass(32px);
+    line-height: 1.125;
+    letter-spacing: -0.89px;
+  }
 }
 
 html {
@@ -392,6 +404,9 @@ html {
 
 p {
   padding: 30px 0;
+  @include breakpoint(medium750-down) {
+    padding: 15px 0;
+  }
 }
 
 *::before,
@@ -493,6 +508,9 @@ hr.short {
       font-size: 0;
     }
   }
+  @include breakpoint(medium750-down) {
+    background-color: #4a4a4a !important;
+  }
 }
 
 .cookieText {
@@ -532,6 +550,11 @@ h2 {
   line-height: 1.28;
   color: #b0291c;
   letter-spacing: -1px;
+  @include breakpoint(medium750-down) {
+    @include font-size-sass(32px);
+    letter-spacing: -0.89px;
+    line-height: 1.2;
+  }
 }
 
 .cta-brown,
@@ -543,15 +566,18 @@ h4 {
 
 h4 {
   @include font-size-sass(16px);
+  @include breakpoint(medium750-down) {
+    @include font-size-sass(12px);
+  }
 }
 
 .bx-wrapper {
   border: 0;
   box-shadow: none;
   -webkit-box-shadow: none;
-  .bx-viewport {
+ /* .bx-viewport {
     height: inherit !important;
-  }
+  }*/
   .bx-controls-direction a {
     bottom: 27%;
     top: auto;
@@ -610,6 +636,9 @@ h4 {
   .bx-controls-direction a.disabled {
     display: block;
     opacity: 0.1;
+  }
+  @include breakpoint(medium750-down) {
+    margin-bottom: 30px;
   }
 }
 
@@ -706,6 +735,9 @@ h5 {
 
 .hasTopbar {
   border-top: 2px solid #ab9767;
+  @include breakpoint(medium750-down) {
+    border-top: 2px solid #d8d8d8;
+  }
 }
 
 .video-background {
@@ -724,3 +756,48 @@ h5 {
   height: 100%;
   pointer-events: none;
 }
+
+.fancybox-slide--html {
+  @include breakpoint(medium750-down) {
+    padding: 0;
+  }
+}
+
+.icon-cancel-circled-after {
+  @include breakpoint(medium750-down) {
+    font-size: 0;
+  }
+}
+
+.fancybox-content {
+  @include breakpoint(medium750-down) {
+    padding: 20px;
+  }
+}
+
+.fancybox-button {
+  top: 6px;
+  right: 0;
+  &:focus {
+    outline: none;
+  }
+}
+
+.bx-wrapper .bx-controls-direction a {
+  position: relative;
+  margin-top: 0;
+  display: inline-block;
+  &.disabled {
+    display: inline-block;
+    right: 10px;
+    opacity: 0.3;
+  }
+  &.bx-prev {
+    right: 10px;
+  }
+}
+
+.bx-controls {
+  text-align: center;
+}
+

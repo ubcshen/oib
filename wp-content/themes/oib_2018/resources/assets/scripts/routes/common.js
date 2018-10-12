@@ -6,8 +6,8 @@ export default {
       $(".hiddenTop .container").hide();
     });
 
-    $(".tab").click(function() {
-      $(".tab").removeClass("tab-active");
+    $(".tab:not(.mobile-tab)").click(function() {
+      $(".tab:not(.mobile-tab)").removeClass("tab-active");
       $(this).addClass("tab-active");
       var filterValue = $(this).attr("data-filter");
       $(".grid").isotope({
@@ -56,6 +56,21 @@ export default {
           $(".tab-active:not(.inner-tab)").trigger("click");
         }
       }
+      $(".bxslider").bxSlider({
+        adaptiveHeight: false,
+        controls: true,
+        auto: false,
+        randomStart: false,
+        hideControlOnEnd: true,
+        infiniteLoop: false,
+        pager: false,
+        slideWidth: 1280,
+        //pagerCustom: '#bx-pager'+(index),
+        touchEnabled: true,
+        /*onSliderLoad: function(currentSlide, totalSlides, currentSlideHtmlObject) {
+          $(".testimonial").css("width",($(".bx-viewport").width()));
+        }*/
+      });
       /*if ($(".inner-tab").length) {
         $(".inner-tab.tab-active").trigger("click");
       }*/
@@ -84,19 +99,6 @@ export default {
     };
 
     initScroll();
-
-    $(".bxslider").bxSlider({
-      adaptiveHeight: false,
-      controls: true,
-      auto: false,
-      randomStart: false,
-      hideControlOnEnd: true,
-      infiniteLoop: false,
-      pager: false,
-      slideWidth: 1280,
-      //pagerCustom: '#bx-pager'+(index),
-      touchEnabled: true
-    });
 
     /*if( $(".banner").offset().top > 0 ) {
       $(".banner").addClass("fixed");
@@ -182,6 +184,18 @@ export default {
           );
           return false;
         }
+      }
+    });
+
+    $(".mobile-tab").click(function() {
+      if(!$(this).hasClass("mobile-tab-active")) {
+        $(".mobile-tab-active").removeClass("mobile-tab-active");
+        $(".mobile-content-active").removeClass("mobile-content-active");
+        $(this).addClass("mobile-tab-active");
+        $(this).next().addClass("mobile-content-active");
+      } else {
+        $(this).removeClass("mobile-tab-active");
+        $(this).next().removeClass("mobile-content-active");
       }
     });
   },
