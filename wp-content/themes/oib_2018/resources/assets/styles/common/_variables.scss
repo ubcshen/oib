@@ -38,7 +38,6 @@
 
 .icon-cancel-circled::before {
   content: "\e800";
-  color: #fff;
 } /* '' */
 .icon-right_arrow_active::before {
   content: "\e801";
@@ -61,27 +60,41 @@
 .icon-minus::before {
   content: "\e807";
 } /* '' */
+.icon-cancel::before {
+  content: "\e808";
+} /* '' */
+.icon-down-open::before {
+  content: "\e809";
+} /* '' */
+.icon-right-open::before {
+  content: "\e80a";
+} /* '' */
+.icon-gplus-squared::before {
+  content: "\f0d4";
+} /* '' */
 .icon-youtube::before {
   content: "\f167";
 } /* '' */
 .icon-instagram::before {
   content: "\f16d";
 } /* '' */
-.icon-twitter-squared::before {
-  content: "\f304";
-} /* '' */
-.icon-facebook-squared::before {
-  content: "\f308";
-} /* '' */
 .icon-mail-squared::before {
   content: "\f199";
 } /* '' */
 .icon-share-squared::before {
   content: "\f1e1";
 } /* '' */
-.icon-gplus-squared::before {
-  content: "\f0d4";
-} /* '' */
+.icon-twitter-squared::before {
+  content: "\f304";
+} /* '' */
+.icon-facebook-squared::before {
+  content: "\f308";
+} /* '' */
+.icon-menu::before {
+  content: "\f0c9";
+  font-size: 20px;
+  color: #ab9767;
+} /* '' */
 
 .icon-cancel-circled-after {
   font-style: normal;

@@ -430,7 +430,7 @@ p {
     content: "";
     display: inline-block;
     height: 100%;
-    width: 1px;
+    width: 0;
     vertical-align: middle;
     margin-right: -0.25em; /* Adjusts for spacing */
   }
@@ -575,7 +575,7 @@ h4 {
   border: 0;
   box-shadow: none;
   -webkit-box-shadow: none;
- /* .bx-viewport {
+  /* .bx-viewport {
     height: inherit !important;
   }*/
   .bx-controls-direction a {
@@ -737,6 +737,20 @@ h5 {
   border-top: 2px solid #ab9767;
   @include breakpoint(medium750-down) {
     border-top: 2px solid #d8d8d8;
+    .inner-container h3 {
+      color: #ab9767;
+      font-weight: 600;
+      margin: 15px 0;
+    }
+  }
+}
+
+.double-filters-mobile-layout {
+  .inner-container h3 {
+    color: #ab9767;
+    font-weight: 600;
+    margin: 15px 0 15px 15px;
+    text-align: left;
   }
 }
 
@@ -801,3 +815,70 @@ h5 {
   text-align: center;
 }
 
+.select2-container {
+  width: 100% !important;
+  margin: 0 auto;
+  border-radius: 0;
+  padding: 0;
+}
+
+.select2-container--default .select2-selection--single {
+  padding: 10px 20px;
+  height: 100%;
+  .select2-selection__arrow {
+    top: 13px;
+    right: 20px;
+  }
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered,
+.select2-results__option {
+  color: #ab9767;
+  font-weight: 600;
+}
+
+.select2-results__option {
+  padding: 10px 20px;
+}
+
+.select2-container .select2-selection--single .select2-selection__rendered {
+  padding-left: 0;
+  text-align: left;
+}
+
+.mobileV-container .element-item {
+  display: none;
+  &.mobile-content-active {
+    display: block;
+  }
+  figure {
+    margin-top: 15px;
+  }
+}
+
+a:active,
+a:focus {
+  color: #fff;
+}
+
+.bx-wrapper img {
+  @include breakpoint(medium750-down) {
+    max-width: 680px;
+  }
+}
+
+.section-tabs-system {
+  height: 100%;
+}
+
+.testimonial-bg-image {
+  background-repeat:no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  img {
+    visibility: hidden;
+  }
+}

@@ -1,6 +1,9 @@
 .section-header {
   height: 460px;
   position: relative;
+  @include breakpoint(medium750-down) {
+    height: 300px;
+  }
 }
 
 .section-banner {
@@ -70,6 +73,23 @@
       padding-top: 30px;
     }
   }
+  @include breakpoint(medium1200-down) {
+    margin-left: -460px;
+    padding: 30px;
+    width: 90%;
+  }
+  @include breakpoint(small568-down) {
+    margin-left: -169px;
+    padding: 20px;
+    width: 338px;
+    -webkit-box-shadow: 0px 3px 90px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 3px 90px 0px rgba(0, 0, 0, 0.3);
+    bottom: -180px;
+    h1 {
+      line-height: 1.2;
+      margin: 5px 0 10px;
+    }
+  }
 }
 
 .element-item {
@@ -87,6 +107,9 @@
 
 .section-margin-top {
   margin-top: 120px;
+  @include breakpoint(small568-down) {
+    margin-top: 230px;
+  }
 }
 
 .fliter-btns-group {
@@ -120,6 +143,7 @@
       border-top: 2px solid #ab9767;
       line-height: 2.875;
       padding-left: 30px;
+      text-align: left;
       &:nth-last-child(2) {
         border-bottom: 2px solid #ab9767;
         padding-right: 20px;
@@ -142,7 +166,7 @@
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
         float: right;
-        padding-right: 30px;
+        padding-right: 50px;
       }
       &.mobile-tab-active {
         border-bottom: 2px solid #ab9767;
@@ -169,6 +193,9 @@
       padding: 3px 0;
       display: block;
       font-weight: 400;
+    }
+    @include breakpoint(medium750-down) {
+      max-width: none;
     }
   }
 }
@@ -219,6 +246,9 @@
       padding: 3px 0;
       display: block;
       font-weight: 400;
+    }
+    @include breakpoint(medium750-down) {
+      max-width: none;
     }
   }
 }
@@ -363,6 +393,16 @@
       .element-item p {
         padding: 30px 0;
       }
+      @include breakpoint(medium750-down) {
+        width: 100%;
+        padding-left: 0;
+        .element-item p {
+          padding: 15px 0;
+        }
+        .inner-container {
+          margin-top: 25px;
+        }
+      }
     }
     &.mobile-content {
       padding: 0;
@@ -375,6 +415,9 @@
         p {
           font-size: 0;
         }
+      }
+      .inner-tabs {
+        height: 0;
       }
       @include transition2x(
         padding 0.3s linear,
@@ -394,6 +437,9 @@
             letter-spacing: -0.44px;
             padding-top: 20px;
           }
+        }
+        .inner-tabs {
+          height: auto;
         }
         @include transition2x(
           padding 0.3s linear,
@@ -434,6 +480,10 @@
       margin-top: 0;
       .element-item p {
         padding: 30px 0;
+      }
+      @include breakpoint(medium750-down) {
+        width: 100%;
+        padding-left: 0;
       }
     }
   }
@@ -813,6 +863,10 @@
     .inner-container {
       max-width: 724px;
       width: 100%;
+      @include breakpoint(small568-down) {
+        width: 90%;
+        display: block;
+      }
     }
     .social {
       i::before {
@@ -842,6 +896,10 @@
       a {
         display: block;
         padding: 20px 0;
+      }
+      @include breakpoint(small568-down) {
+        margin: 0 auto;
+        display: block;
       }
     }
   }
@@ -918,5 +976,25 @@
 .opportunities {
   .section-testimonials > .inner-container {
     padding: 50px 0 0;
+  }
+}
+
+.double-filters-mobile-layout .mobileV-container {
+  .element-item-inner {
+    display: none;
+  }
+  .mobile-content-active.element-item-inner {
+    display: block;
+  }
+}
+
+.newsroom {
+  @include breakpoint(small568-down) {
+    .fliter-btns-group .tab {
+      display: inline-block;
+    }
+    .fliter-btns-group {
+      padding: 8px 0;
+    }
   }
 }

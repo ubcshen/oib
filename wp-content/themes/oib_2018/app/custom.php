@@ -190,11 +190,6 @@ function load_Feature_Img($className, $fieldName) { ?>
       background-image: url(<?php $img=wp_get_attachment_image_src( get_post_thumbnail_id( $fieldName ),  "large"); echo $img[0];  ?>);
     }
   }
-  @media only screen and (max-width: 640px) {
-    <?php echo $className; ?> {
-      background-image: url(<?php $img=wp_get_attachment_image_src( get_post_thumbnail_id( $fieldName ), "medium"); echo $img[0];  ?>);
-    }
-  }
   </style>
   <?php
     $detect = new Mobile_Detect;
@@ -254,6 +249,7 @@ function load_Img_no_mobile_not_sub($className, $fieldName) { ?>
 function build_sections()
 {
     $question_count = 1;
+    $detect = new Mobile_Detect;
 
     if( get_field('section_builder') )
     {
@@ -301,23 +297,151 @@ function build_sections()
             {
                 $tabAlignment = get_sub_field("tab_position");
                 $hasDouble = get_sub_field("enable_double_filters");
-                $detect = new Mobile_Detect;
-                if($detect->isMobile()) { ?>
-                    <section class="container section-tabs-system mobile-container">
-                        <div class="fliter-btns-group">
-                            <?php
-                                $i = 0;
-                                while(has_sub_field('section_tabs')):
-                                    $tab = strtolower(get_sub_field("tab"));
-                                    $tab = preg_replace('/\s+/', '_', $tab);
-                            ?>
-                                <div class="inline tab mobile-tab" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("tab");?></div>
-                                <div class="grid section-content mobile-content">
-                                    <div class="inner-container"><?php echo get_sub_field("tab_section"); ?></div>
+                if($detect->isMobile()&&!$detect->isTablet()) { ?>
+                    <?php if(!$hasDouble) { ?>
+                        <?php if(!$tabAlignment=="vertical") { ?>
+                            <section class="container section-tabs-system mobile-container">
+                                <div class="fliter-btns-group">
+                                    <?php
+                                        $i = 0;
+                                        while(has_sub_field('section_tabs')):
+                                            $tab = strtolower(get_sub_field("tab"));
+                                            $tab = preg_replace('/\s+/', '_', $tab);
+                                    ?>
+                                        <div class="inline tab mobile-tab"><?php echo get_sub_field("tab");?></div>
+                                        <div class="grid section-content mobile-content">
+                                            <div class="inner-container"><?php echo get_sub_field("tab_section"); ?></div>
+                                            <?php if(get_sub_field("has_slider")) { ?>
+                                                <div class="testimonials bxslider">
+                                                    <?php
+                                                      while(has_sub_field('tab_testimonial_system')):
+                                                        $image = get_sub_field('tab_testimonial_image');
+                                                        $link = get_sub_field('tab_testimonial_company_link');
+                                                    ?>
+                                                    <div class="testimonial">
+                                                        <div class="testimonial-bg-image" style="background-image: url('<?php echo $image['url']; ?>');">
+                                                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive testimonial-image" />
+                                                        </div>
+                                                        <div class="item-content hasBg">
+                                                            <div class="hasBg-content">
+                                                                <div class="hasBg-content-padding">
+                                                                    <p class="testimonial-content"><?php echo get_sub_field("tab_testimonial"); ?></p>
+                                                                    <p class="testimonial-author"><?php echo get_sub_field("tab_testimonial_author_info"); ?></p>
+                                                                    <p class="testimonial-author">
+                                                                        <?php
+                                                                            echo get_sub_field("tab_testimonial_company");
+                                                                            if($link) {
+                                                                                echo "<span> | </span><a href='http://" . $link . "' target='_blank'>" . $link . "</a>";
+                                                                            }
+                                                                        ?>
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php endwhile; ?>
+                                                 </div>
+                                            <?php } ?>
+                                        </div>
+                                    <?php $i++; endwhile; ?>
                                 </div>
-                            <?php $i++; endwhile; ?>
-                        </div>
-                    </section>
+                            </section>
+                        <?php } else { ?>
+                            <section class="container section-tabs-system mobile-container hasTopbar">
+                                <div class="inner-container">
+                                    <h3><?php echo get_sub_field("tab_vertical_headline"); ?></h3>
+                                    <select class='filter-div-select'>
+                                        <?php
+                                            while(has_sub_field('section_tabs')):
+                                                $tab = strtolower(get_sub_field("tab"));
+                                                $tab = preg_replace('/\s+/', '_', $tab);
+                                        ?>
+                                        <option class='filter-list filter-list-item' value='#<?php echo $tab; ?>'><?php echo get_sub_field("tab"); ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+                                </div>
+                                <div class="grid section-content grid-alignV mobileV-container">
+                                    <?php
+                                      while(has_sub_field('section_tabs')):
+                                        $tab = strtolower(get_sub_field("tab"));
+                                        $tab = preg_replace('/\s+/', '_', $tab);
+                                    ?>
+                                    <div class="<?php echo $tab; ?> element-item" id="<?php echo $tab; ?>">
+                                        <div class="inner-container"><?php echo get_sub_field("tab_section"); ?></div>
+                                        <?php if(get_sub_field("has_slider")) { ?>
+                                        <div class="testimonials bxslider">
+                                            <?php
+                                              while(has_sub_field('tab_testimonial_system')):
+                                                $image = get_sub_field('tab_testimonial_image');
+                                                $link = get_sub_field('tab_testimonial_company_link');
+                                            ?>
+                                            <div class="testimonial">
+                                                <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive testimonial-image" />
+                                                <div class="item-content hasBg">
+                                                    <div class="hasBg-content">
+                                                        <div class="hasBg-content-padding">
+                                                            <p class="testimonial-content"><?php echo get_sub_field("tab_testimonial"); ?></p>
+                                                            <p class="testimonial-author"><?php echo get_sub_field("tab_testimonial_author_info"); ?></p>
+                                                            <p class="testimonial-author">
+                                                                <?php
+                                                                    echo get_sub_field("tab_testimonial_company");
+                                                                    if($link) {
+                                                                        echo "<span> | </span><a href='http://" . $link . "' target='_blank'>" . $link . "</a>";
+                                                                    }
+                                                                ?>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <?php endwhile; ?>
+                                         </div>
+                                        <?php } ?>
+                                    </div>
+                                    <?php endwhile; ?>
+                                </div>
+                            </section>
+                        <?php } ?>
+                    <?php } else { ?>
+                        <section class="container section-tabs-system mobile-container double-filters-mobile-layout">
+                            <div class="fliter-btns-group">
+                                <?php $i = 0;
+                                while(has_sub_field('double_filters_layout')):
+                                    $tab = strtolower(get_sub_field("horizontal_tab"));
+                                    $tab = preg_replace('/\s+/', '_', $tab);
+                                ?>
+                                <div class="inline tab mobile-tab"><?php echo get_sub_field("horizontal_tab"); ?></div>
+                                <div class="grid section-content mobile-content">
+                                    <div class="<?php echo $tab; ?> inner-tabs element-item">
+                                        <div class="inner-container">
+                                            <h3><?php echo get_sub_field("vertical_tab_headline"); ?></h3>
+                                            <select class='filter-div-select'>
+                                                <?php
+                                                    $j = 0;
+                                                    while(has_sub_field('horizontal_tab_content')):
+                                                        $tabV = strtolower(get_sub_field("vertical_tab"));
+                                                        $tabV = preg_replace('/\s+/', '_', $tabV);
+                                                ?>
+                                                <option class='filter-list filter-list-item' value='#<?php echo $tabV; ?>'><?php echo get_sub_field("vertical_tab"); ?></option>
+                                                <?php $j++; endwhile; ?>
+                                            </select>
+                                            <div class="grid-inner section-content grid-alignV mobileV-container">
+                                                <?php
+                                                  while(has_sub_field('horizontal_tab_content')):
+                                                    $tabV = strtolower(get_sub_field("vertical_tab"));
+                                                    $tabV = preg_replace('/\s+/', '_', $tabV);
+                                                ?>
+                                                <div class="<?php echo $tab; ?> <?php echo $tabV; ?> element-item-inner" id="<?php echo $tabV; ?>">
+                                                    <div class="inner-container"><?php echo get_sub_field("vertical_tab_content"); ?></div>
+                                                </div>
+                                                <?php endwhile; ?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              <?php $i++; endwhile; ?>
+                        </section>
+                    <?php } ?>
                 <?php } else {
                     if(!$hasDouble) {
                 ?>
@@ -423,8 +547,21 @@ function build_sections()
             elseif( get_row_layout() == "section_banner" ) // layout: Section Banner
             { ?>
                 <?php load_Img(".section-banner", "banner_background_image"); ?>
+                <?php if(is_front_page()&&($detect->isMobile()&&!$detect->isTablet())) { ?>
+                    <header class="banner">
+                      <div class="container">
+                        <a class="brand inline" href="/">
+                          <?php $image = get_field('header_logo_home_page', 'option'); ?>
+                          <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="115" height="140" class="img-responsive" />
+                        </a>
+                        <nav class="mobile-primary inline">
+                          <i class="icon-menu"></i>
+                        </nav>
+                      </div>
+                    </header>
+                <?php } ?>
                 <section class="section-banner normalHeight <?php if(!is_front_page()) { echo 'valign-center'; } ?>">
-                    <?php if(is_front_page()) { ?>
+                    <?php if(is_front_page()&&!$detect->isMobile()) { ?>
                         <header class="banner">
                           <div class="container">
                             <a class="brand inline" href="/">
@@ -438,7 +575,7 @@ function build_sections()
                             </nav>
                           </div>
                         </header>
-                        <?php $detect = new Mobile_Detect; if(get_sub_field("banner_background_video") && !$detect->isMobile()) { ?>
+                        <?php  if(get_sub_field("banner_background_video") && !$detect->isMobile()) { ?>
                         <div class="video-background">
                             <div class="video-foreground">
                               <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autoplay=1&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>

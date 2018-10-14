@@ -6,16 +6,44 @@ export default {
       $(".hiddenTop .container").hide();
     });
 
+    var desktopSlider = $(".bxslider").bxSlider({
+      adaptiveHeight: false,
+      controls: true,
+      auto: false,
+      randomStart: false,
+      hideControlOnEnd: true,
+      infiniteLoop: false,
+      pager: false,
+      //slideWidth: 1280,
+      //pagerCustom: '#bx-pager'+(index),
+      touchEnabled: true,
+      /*onSliderLoad: function(currentSlide, totalSlides, currentSlideHtmlObject) {
+        $(".bx-viewport, .bxslider").css("height",($(".bx-wrapper").height()));
+      }*/
+    });
+
     $(".tab:not(.mobile-tab)").click(function() {
       $(".tab:not(.mobile-tab)").removeClass("tab-active");
       $(this).addClass("tab-active");
       var filterValue = $(this).attr("data-filter");
-      $(".grid").isotope({
+      var $grid = $(".grid").isotope({
         itemSelector: ".element-item",
         layoutMode: "fitRows",
         filter: filterValue
         //filter: ".tourism, .oib_development"
       });
+
+      //$grid();
+
+      $grid.on( 'arrangeComplete', function( event, filteredItems ) {
+        console.log("Dfd");
+        if ($(".bxslider").is(':visible')) {
+          desktopSlider.redrawSlider();
+          $(".section-content").css("height",$(".bx-wrapper").parent().outerHeight());
+          //$(".section-tabs-system").css("height",$(".section-content").height());
+        }
+      });
+
       if ($(".fliter-btns-group-inner").length) {   /* for business page or any page has a double filters */
         var innerFilter = $(filterValue).find(".inner-tab:first");
         $(innerFilter).addClass("tab-active");
@@ -30,7 +58,6 @@ export default {
     });
 
 
-
     $(".inner-tab").click(function() {
       $(".inner-tab").removeClass("tab-active");
       $(this).addClass("tab-active");
@@ -40,40 +67,6 @@ export default {
         layoutMode: "fitRows",
         filter: filterValue
       });
-    });
-
-    $(window).load(function() {
-      if ($(".fliter-btns-group-inner").length) {
-        $(".fliter-btns-group-inner").each(function( index ) {
-          $(this).find(".tab-active").trigger("click");
-        });
-        $(".tab-active:not(.inner-tab)").trigger("click");
-
-        //$(".tab-active:not(.inner-tab)").trigger("click");
-        //$(".inner-tab.tab-active").trigger("click");
-      } else {
-        if ($(".fliter-btns-group").length) {
-          $(".tab-active:not(.inner-tab)").trigger("click");
-        }
-      }
-      $(".bxslider").bxSlider({
-        adaptiveHeight: false,
-        controls: true,
-        auto: false,
-        randomStart: false,
-        hideControlOnEnd: true,
-        infiniteLoop: false,
-        pager: false,
-        slideWidth: 1280,
-        //pagerCustom: '#bx-pager'+(index),
-        touchEnabled: true,
-        /*onSliderLoad: function(currentSlide, totalSlides, currentSlideHtmlObject) {
-          $(".testimonial").css("width",($(".bx-viewport").width()));
-        }*/
-      });
-      /*if ($(".inner-tab").length) {
-        $(".inner-tab.tab-active").trigger("click");
-      }*/
     });
 
     var initScroll = function() {
@@ -196,6 +189,93 @@ export default {
       } else {
         $(this).removeClass("mobile-tab-active");
         $(this).next().removeClass("mobile-content-active");
+      }
+      if($(".filter-div-select").length) {  // for double filters
+        //$(".mobileV-container .element-item-inner").removeClass("mobile-content-active");
+        var selectOption = $(this).next().find('.filter-div-select option:selected').val();
+        if($(selectOption).hasClass("mobile-content-active")) {
+          $(selectOption).removeClass("mobile-content-active");
+        } else {
+          $(".mobileV-container .element-item-inner").removeClass("mobile-content-active");
+          $(selectOption).addClass("mobile-content-active");
+        }
+      }
+    });
+
+    if($(".filter-div-select").length) {
+      $('.filter-div-select').select2(
+        {
+          minimumResultsForSearch: -1,
+        }
+      );
+
+      $('.filter-div-select').on('change', function() {
+        $(".mobileV-container .element-item, .mobileV-container .element-item-inner").removeClass("mobile-content-active");
+        //console.log("sds");
+        var selectOption = $(this).find(":selected").attr("value");
+        $(selectOption).addClass("mobile-content-active");
+        //if($(selectOption))
+      });
+    }
+
+    if($(".mobile-primary").is(':visible')) {
+      if(!$(".icon-menu").hasClass("close")) {
+        $(".mobile-primary").click(function() {
+          $(".icon-menu").addClass("close");
+          $(".hide-desktop").addClass("open");
+          $("body").addClass("open");
+        });
+      }
+    }
+
+
+    /*$("body").click(function(e) {
+      if($(this).hasClass("open")) {
+        console.log($(e.target).attr('class'));
+        if ( !e.target.classList.contains('icon-menu close') ) {
+          console.log("111Dfd");
+          $(".icon-menu").removeClass("close");
+          $(".hide-desktop").removeClass("open");
+          $(this).removeClass("open");
+        }
+      }
+    });*/
+
+
+      $('.main-container').on('click touchstart', function(e) {
+         if( $("body").hasClass("open") ){
+          if($(".icon-menu").hasClass("close")) {
+            $(".icon-menu").removeClass("close");
+            $(".hide-desktop").removeClass("open");
+            $("body").removeClass("open");
+          }
+        }
+      }).on('click', '.mobile-primary', function(e) {
+        e.stopPropagation();
+      });
+
+
+//element-item-inner
+    $(window).load(function() {
+      if($(".filter-div-select").length) {
+        var selectOption = $(".filter-div-select option:first").attr("value");
+        $(selectOption).addClass("mobile-content-active");
+      }
+      if ($(".fliter-btns-group-inner").length) {
+        $(".fliter-btns-group-inner").each(function( index ) {
+          $(this).find(".tab-active").trigger("click");
+        });
+        $(".tab-active:not(.inner-tab)").trigger("click");
+
+        //$(".tab-active:not(.inner-tab)").trigger("click");
+        //$(".inner-tab.tab-active").trigger("click");
+      } else {
+        if ($(".fliter-btns-group").length) {
+          $(".tab-active:not(.inner-tab)").trigger("click");
+        }
+      }
+      if ($(".bxslider").length) {
+        desktopSlider.reloadSlider();
       }
     });
   },

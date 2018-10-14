@@ -30,6 +30,9 @@
         {!! wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav']) !!}
       @endif
     </nav>
+    <nav class="mobile-primary inline">
+      <i class="icon-menu"></i>
+    </nav>
   </div>
 </header>
 <?php }
