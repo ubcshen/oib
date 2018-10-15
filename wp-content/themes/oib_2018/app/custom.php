@@ -540,13 +540,16 @@ function build_sections()
                     <?php } else { ?>
                     <section class="container section-tabs-system">
                             <div class="fliter-btns-group">
-                              <?php $i = 0;
-                                while(has_sub_field('double_filters_layout')):
-                                    $tab = strtolower(get_sub_field("horizontal_tab"));
-                                    $tab = preg_replace('/\s+/', '_', $tab);
-                              ?>
-                              <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("horizontal_tab"); ?></div>
-                              <?php $i++; endwhile; ?>
+                                <div class="fliter-inner">
+                                  <?php $i = 0;
+                                    while(has_sub_field('double_filters_layout')):
+                                        $tab = strtolower(get_sub_field("horizontal_tab"));
+                                        $tab = preg_replace('/\s+/', '_', $tab);
+                                  ?>
+                                  <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("horizontal_tab"); ?></div>
+                                  <?php $i++; endwhile; ?>
+                                  <hr class="underline" />
+                                </div>
                             </div>
                             <div class="grid section-content inner-container">
                                 <?php while(has_sub_field('double_filters_layout')):

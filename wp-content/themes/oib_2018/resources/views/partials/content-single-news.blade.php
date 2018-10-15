@@ -62,13 +62,14 @@ if ( ! empty( $categories ) ) {
             $category = 'news';
             if ( ! empty( $categories ) ) {
               $category = esc_html( $categories[0]->name );
+              $categorySlug = esc_html( $categories[0]->slug );
             }
         ?>
         <div class="inline element-item <?php echo $cat->slug; ?>">
           <div class="item">
               <img src="<?php echo $image[0]; ?>" alt="<?php echo get_the_title($the_query->post->ID); ?>" width="<?php echo $image[1]; ?>" height="<?php echo $image[2]; ?>" class="img-responsive" />
               <div class="item-content">
-                  <h4><?php echo $category; ?></h4>
+                  <h4><a href="/news_categories/<?php echo strtolower($categorySlug); ?>" class="cta-brown"><?php echo $category; ?></a></h4>
                   <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title($the_query->post->ID); ?></a>
                   <p><?php echo get_the_excerpt($the_query->post->ID); ?></p>
               </div>

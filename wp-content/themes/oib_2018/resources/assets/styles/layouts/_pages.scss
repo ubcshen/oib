@@ -65,21 +65,24 @@
   bottom: -120px;
   z-index: 2;
   left: 50%;
-  margin-left: -650px;
+  //margin-left: -650px;
+  margin-left: calc(-45%);
   padding: 60px 100px;
+  width: 100%;
   p {
     padding: 0;
     &.author-info {
-      padding-top: 30px;
+      padding-top: 25px;
+      @include font-size-sass(16px);
     }
   }
   @include breakpoint(medium1200-down) {
-    margin-left: -460px;
+    //margin-left: -460px;
     padding: 30px;
     width: 90%;
   }
   @include breakpoint(small568-down) {
-    margin-left: -169px;
+    //margin-left: -169px;
     padding: 20px;
     width: 338px;
     -webkit-box-shadow: 0px 3px 90px 0px rgba(0, 0, 0, 0.3);
@@ -116,8 +119,23 @@
   border-top: 2px solid #d8d8d8;
   border-bottom: 2px solid #d8d8d8;
   text-align: center;
-  padding: 25px 0;
+  //padding: 25px 0;
   margin-bottom: 30px;
+  .fliter-inner {
+    padding: 25px 0;
+    position: relative;
+    display: inline-block;
+    .underline {
+      position: absolute;
+      bottom: -2px;
+      height: 3px;
+      background-color: #b0291c;
+      border: none;
+      transition: 0.3s ease-in-out;
+      margin: 0;
+      width: 12%;
+    }
+  }
   .tab {
     @include font-size-sass(16px);
     padding: 0 20px;
@@ -126,6 +144,7 @@
     &.tab-active,
     &.mobile-tab-active {
       color: #b0291c;
+      font-weight: 600;
     }
     &:hover {
       cursor: pointer;
@@ -555,7 +574,7 @@
     overflow: hidden;
     margin-top: 30px;
     .col {
-      width: 42%;
+      width: 48%;
       float: left;
       &:last-child {
         float: right;
@@ -764,15 +783,15 @@
   overflow: hidden;
   padding: 30px 0;
   .content {
-    width: 42%;
-    margin-top: 15%;
+    width: 52%;
+    margin-top: 10%;
     @include breakpoint(medium800-down) {
       width: 100%;
     }
   }
   img {
     display: block;
-    width: 46%;
+    width: 36%;
     @include breakpoint(medium800-down) {
       width: 80%;
       margin: 10px auto;

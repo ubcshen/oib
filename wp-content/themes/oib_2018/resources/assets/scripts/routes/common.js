@@ -14,6 +14,7 @@ export default {
       hideControlOnEnd: true,
       infiniteLoop: false,
       pager: false,
+      mode: 'fade',
       touchEnabled: true,
     });
 
@@ -24,7 +25,8 @@ export default {
       var $grid = $(".grid").isotope({
         itemSelector: ".element-item",
         layoutMode: "fitRows",
-        filter: filterValue
+        filter: filterValue,
+        transitionDuration: 0
         //filter: ".tourism, .oib_development"
       });
 
