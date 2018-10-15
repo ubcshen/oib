@@ -122,10 +122,10 @@
   //padding: 25px 0;
   margin-bottom: 30px;
   .fliter-inner {
-    padding: 25px 0;
+    padding: 0;
     position: relative;
     display: inline-block;
-    .underline {
+    /*.underline {
       position: absolute;
       bottom: -2px;
       height: 3px;
@@ -134,22 +134,27 @@
       transition: 0.3s ease-in-out;
       margin: 0;
       width: 12%;
-    }
+    }*/
   }
   .tab {
     @include font-size-sass(16px);
-    padding: 0 20px;
+    margin: 0 20px;
     font-weight: 600;
     color: #ab9767;
+    padding-top: 25px;
+    padding-bottom: 25px;
     &.tab-active,
     &.mobile-tab-active {
       color: #b0291c;
       font-weight: 600;
     }
+    &.tab-active {
+      border-bottom: 3px solid #b0291c;
+    }
     &:hover {
       cursor: pointer;
     }
-    &:first-child {
+    /*&:first-child {
       padding-left: 0;
     }
     &:last-child {
@@ -157,7 +162,7 @@
     }
     @include breakpoint(medium750-down) {
       display: block;
-    }
+    }*/
     &.mobile-tab {
       border-top: 2px solid #ab9767;
       line-height: 2.875;
@@ -273,17 +278,28 @@
 }
 
 .grid {
+  //display: table;
+  margin: 0 auto;
   .element-item {
     max-width: 390px;
-    margin: 30px 1%;
-    width: 30%;
-    /*&:nth-child(3n-1) {
-      margin: 30px 4%;
-    }*/
+    margin: 30px 1.7%;
+    width: 31%;
+    &:nth-child(3n-2) {
+      margin-left: 0;
+    }
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
     @include breakpoint(medium750-down) {
       width: 100%;
       margin: 15px auto;
       max-width: none;
+      &:nth-child(3n-2) {
+        margin-left: auto;
+      }
+      &:nth-child(3n) {
+        margin-right: auto;
+      }
     }
   }
   .item-content {

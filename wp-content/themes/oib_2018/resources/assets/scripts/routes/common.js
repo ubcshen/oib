@@ -22,13 +22,21 @@ export default {
       $(".tab:not(.mobile-tab)").removeClass("tab-active");
       $(this).addClass("tab-active");
       var filterValue = $(this).attr("data-filter");
-      var $grid = $(".grid").isotope({
-        itemSelector: ".element-item",
-        layoutMode: "fitRows",
-        filter: filterValue,
-        transitionDuration: 0
-        //filter: ".tourism, .oib_development"
-      });
+      var $grid = '';
+      if($("body").hasClass("newsroom")) {
+        $grid = $(".grid").isotope({
+          itemSelector: ".element-item",
+          layoutMode: "fitRows",
+          filter: filterValue,
+        });
+      } else {
+        $grid = $(".grid").isotope({
+          itemSelector: ".element-item",
+          layoutMode: "fitRows",
+          filter: filterValue,
+          transitionDuration: 0
+        });
+      }
 
       $grid.on( 'arrangeComplete', function( event, filteredItems ) {
         if ($(".bxslider").is(':visible')) {

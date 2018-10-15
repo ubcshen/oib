@@ -35,13 +35,10 @@ if ( ! empty( $categories ) ) {
       ));
     ?>
     <div class="fliter-btns-group">
-      <div class="fliter-inner">
-        <?php $filter_text = '<div class="inline tab tab-active" data-filter="*">All Topics</div>';
-        foreach($resource as $c) {
-          $filter_text .= '<div class="inline tab" data-filter=".' . $c->slug. '">' . $c->name . '</div>';
-        } echo $filter_text; ?>
-        <hr class="underline" />
-      </div>
+      <?php $filter_text = '<div class="inline tab tab-active" data-filter="*">All Topics</div>';
+      foreach($resource as $c) {
+        $filter_text .= '<div class="inline tab" data-filter=".' . $c->slug. '">' . $c->name . '</div>';
+      } echo $filter_text; ?>
     </div>
     <?php
       global $paged;
