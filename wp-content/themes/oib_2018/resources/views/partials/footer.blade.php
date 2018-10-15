@@ -3,7 +3,7 @@
     <div class="copyright"><?php the_field('copyright', 'option'); ?></div>
     <div class="brand_declaration"><?php the_field('brand_declaration', 'option'); ?></div>
     <hr class="short" />
-    <a href="/privacy/">Privacy Policy</a>
+    <a href="/privacy/" class="foot-link">Privacy Policy</a>
     <div class="social_medias">
       <div class="inline boldMF"><?php the_field('follow_us', 'option'); ?></div>
       <div class="inline social_icons">

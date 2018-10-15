@@ -1,40 +1,39 @@
 export default {
   init() {
     // JavaScript to be fired on the home page
-    // init Isotope
-    /*$(".tab").click(function() {
-      $(".tab").removeClass("tab-active");
-      $(this).addClass("tab-active");
-      var filterValue = $(this).attr("data-filter");
-      $(".grid").isotope({
-        itemSelector: ".element-item",
-        layoutMode: "fitRows",
-        filter: filterValue,
+    var loadMore = function() {
+      var itemHeight = $(".element-item")[0].scrollHeight;
+      //console.log("sds: " + itemHeight*2);
+      //console.log($(".infinitescroll")[0].scrollHeight);
+      var oneItemHeight = itemHeight;
+      var addItemHeight = itemHeight*2 + 121;
+      itemHeight = itemHeight*2 + 142;
+      $('.infinitescroll').height(itemHeight);
+      $('#wp_pagination a').click(function (e) {
+        e.preventDefault();
+        //console.log($('.infinitescroll').height());
+        //console.log($(".infinitescroll")[0].scrollHeight);
+        if( $('.infinitescroll').height() < ($(".infinitescroll")[0].scrollHeight - (addItemHeight)) ) {
+          //console.log($(".infinitescroll")[0].scrollHeight - (oneItemHeight));
+          $('.infinitescroll').animate({
+            height: '+='+addItemHeight+'px'
+          }, 500);
+        }
+        else {
+          $('.infinitescroll').height($(".infinitescroll")[0].scrollHeight - (addItemHeight));
+          $('.infinitescroll').css({
+            height: '+=' + ( oneItemHeight + 80 ) + 'px'
+          });
+          $("#wp_pagination a").hide();
+        }
       });
-    });
-
-    var initScroll = function() {
-      if ($(".grid.infinitescroll").length) {
-        $(".grid").infinitescroll({
-          behavior  : 'twitter',
-          bufferPx: 40,
-          //debug  : false,
-          loading: {
-            msgText: "",
-            //img : 'data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
-            //img: loadImg,
-            finishedMsg: "",
-          },
-          navSelector: "#wp_pagination",
-          // selector for the paged navigation (it will be hidden)
-          nextSelector: "#wp_pagination a.next:first",
-          // selector for the NEXT link (to page 2)
-          itemSelector: ".element-item",
-          // selector for all items you'll retrieve
-        });
-      }
     };
-    initScroll();*/
+    $(window).load(function() {
+      loadMore();
+    });
+    $( window ).resize(function() {
+      loadMore();
+    });
   },
   finalize() {
     // JavaScript to be fired on the home page, after the init JS

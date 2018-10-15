@@ -14,12 +14,7 @@ export default {
       hideControlOnEnd: true,
       infiniteLoop: false,
       pager: false,
-      //slideWidth: 1280,
-      //pagerCustom: '#bx-pager'+(index),
       touchEnabled: true,
-      /*onSliderLoad: function(currentSlide, totalSlides, currentSlideHtmlObject) {
-        $(".bx-viewport, .bxslider").css("height",($(".bx-wrapper").height()));
-      }*/
     });
 
     $(".tab:not(.mobile-tab)").click(function() {
@@ -33,10 +28,7 @@ export default {
         //filter: ".tourism, .oib_development"
       });
 
-      //$grid();
-
       $grid.on( 'arrangeComplete', function( event, filteredItems ) {
-        console.log("Dfd");
         if ($(".bxslider").is(':visible')) {
           desktopSlider.redrawSlider();
           $(".section-content").css("height",$(".bx-wrapper").parent().outerHeight());
@@ -69,7 +61,7 @@ export default {
       });
     });
 
-    var initScroll = function() {
+    /*var initScroll = function() {
       if ($(".grid.infinitescroll").length) {
         $(".grid").infinitescroll({
           behavior: "twitter",
@@ -91,7 +83,7 @@ export default {
       }
     };
 
-    initScroll();
+    initScroll();*/
 
     /*if( $(".banner").offset().top > 0 ) {
       $(".banner").addClass("fixed");
@@ -99,16 +91,6 @@ export default {
     else {
       $(".banner").removeClass("fixed");
     }*/
-
-    $(window).scroll(function (event) {
-      var scroll = $(window).scrollTop();
-      if(scroll>110) {
-        $(".banner").addClass("fixed");
-      }
-      else {
-        $(".banner").removeClass("fixed");
-      }
-    });
 
     /*if ($(".fliter-btns-group").length) {
       $(".fliter-btns-group .tab").first().trigger("click");
@@ -154,12 +136,15 @@ export default {
         closeEffect : 'none'
     });
 
-    if( $(".banner").offset().top > 110 ) {
-      $(".banner").addClass("fixed");
-    }
-    else {
-      $(".banner").removeClass("fixed");
-    }
+    $(window).scroll(function (event) {
+      var scroll = $(window).scrollTop();
+      if(scroll>110) {
+        $(".banner").addClass("fixed");
+      }
+      else {
+        $(".banner").removeClass("fixed");
+      }
+    });
 
     $('a.anchor[href*="#"]:not([href="#"])').click(function() {
       if (
@@ -257,6 +242,13 @@ export default {
 
 //element-item-inner
     $(window).load(function() {
+      if( $(".banner").offset().top > 110 ) {
+        $(".banner").addClass("fixed");
+      }
+      else {
+        $(".banner").removeClass("fixed");
+      }
+
       if($(".filter-div-select").length) {
         var selectOption = $(".filter-div-select option:first").attr("value");
         $(selectOption).addClass("mobile-content-active");

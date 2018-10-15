@@ -173,6 +173,43 @@ function load_Img($className, $fieldName) { ?>
     echo $css_code;
 }
 
+function load_Tax_Img($className, $fieldName, $hasTerm) { ?>
+
+    <!--[if lt IE 9]>
+    <script>
+        $(document).ready(function() {
+            $("<?php print $className ?>").backstretch("<?php $img=wp_get_attachment_image_src(get_field($fieldName, $hasTerm), "full"); echo $img[0];  ?>");
+        });
+    </script>
+    <![endif]-->
+
+  <style scoped>
+  <?php echo $className; ?> {
+    background-image: url(<?php $img=wp_get_attachment_image_src(get_field($fieldName, $hasTerm), "full"); echo $img[0];  ?>);
+        background-repeat:no-repeat;
+        background-position: center center;
+        background-size: cover;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+  }
+  @media only screen and (max-width: 1024px) {
+    <?php echo $className; ?> {
+      background-image: url(<?php $img=wp_get_attachment_image_src(get_field($fieldName, $hasTerm), "large"); echo $img[0];  ?>);
+    }
+  }
+  </style>
+  <?php
+    $detect = new Mobile_Detect;
+    $css_code = "<style scoped>";
+    if ( $detect->isMobile() )
+    {
+      $css_code .= $className . ' {background-attachment: scroll;}';
+    }
+    $css_code .= "</style>";
+    echo $css_code;
+}
+
 function load_Feature_Img($className, $fieldName) { ?>
 
   <style scoped>

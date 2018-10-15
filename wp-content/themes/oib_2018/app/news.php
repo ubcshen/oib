@@ -63,7 +63,7 @@ function news_taxonomies_init() {
         'labels' => $labels,
         'show_ui' => true,
         'query_var' => true,
-        'rewrite' => array( 'slug' => 'news-filter' ),
+        'rewrite' => array( 'slug' => 'news_categories' ),
     ));
 
     // project Tags

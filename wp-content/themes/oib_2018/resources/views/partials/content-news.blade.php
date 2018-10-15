@@ -46,7 +46,7 @@ if ( ! empty( $categories ) ) {
       $args = array(
         'post_type'=>'news',
         'post_status' => 'publish',
-        'posts_per_page'=>6,
+        'posts_per_page'=>-1,
         'paged'=>$paged,
         'orderby'=>'date',
       );
@@ -68,10 +68,11 @@ if ( ! empty( $categories ) ) {
             $category = 'news';
             if ( ! empty( $categories ) ) {
               $category = esc_html( $categories[0]->name );
+              $categorySlug = esc_html( $categories[0]->slug );
             }
           ?>
           <div class="item-content">
-            <h4><?php echo $category; ?></h4>
+            <h4><a href="/news_categories/<?php echo strtolower($categorySlug); ?>" class="cta-brown"><?php echo $category; ?></a></h4>
             <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title(); ?></a>
             <p><?php echo get_the_excerpt(); ?></p>
             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
@@ -79,11 +80,9 @@ if ( ! empty( $categories ) ) {
         </div>
       <?php } $i++; endwhile; } ?>
     </div>
-    <div id="wp_pagination">
-          <?php if($paged+1 <= $the_query->max_num_pages) {  ?>
-          <a class="next page button nextbutton" href="<?php echo get_pagenum_link(($paged+1 <= $the_query->max_num_pages ? $paged+1 :$the_query->max_num_pages)); ?>">Load More</a>
-          <?php } wp_reset_postdata();?>
-        </div>
+  </div>
+  <div id="wp_pagination">
+    <a class="next btn" href="#">Load More</a>
   </div>
 </section>
 <?php build_sections(); ?>
