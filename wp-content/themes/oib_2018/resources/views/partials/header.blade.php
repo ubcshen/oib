@@ -1,5 +1,6 @@
 <?php //check if the page id is in the enable list on option page
   global $post;
+  $detect = new Mobile_Detect;
   $enableTopbar = false;
   $hasTopbar = get_field('topbar_pages', 'option');
   if( $hasTopbar ):
@@ -22,8 +23,17 @@
 <header class="banner">
   <div class="container">
     <a class="brand inline" href="{{ home_url('/') }}">
-      <?php $image = get_field('header_logo', 'option'); ?>
-      <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="115" height="140" class="img-responsive" />
+      <?php
+      if(!$detect->isMobile()) {
+        $image = get_field('header_logo', 'option');
+        $imageFixed = get_field('header_mobile_logo', 'option');
+      } else {
+        $image = get_field('header_mobile_logo', 'option');
+        $imageFixed = get_field('header_mobile_logo', 'option');
+      }
+      ?>
+      <img src="<?php echo $imageFixed['url']; ?>" alt="<?php echo $imageFixed['alt']; ?>" width="90" height="41" class="img-responsive forFixed" />
+      <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="90" height="41" class="img-responsive forLoaded" />
     </a>
     <nav class="nav-primary inline">
       @if (has_nav_menu('primary_navigation'))

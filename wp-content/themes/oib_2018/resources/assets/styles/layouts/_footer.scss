@@ -18,5 +18,11 @@
     &::after {
       right: 0;
     }
+    @include breakpoint(medium750-down) {
+      &::before,
+      &::after {
+        width: 0;
+      }
+    }
   }
 }

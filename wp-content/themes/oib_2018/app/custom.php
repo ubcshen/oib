@@ -540,16 +540,13 @@ function build_sections()
                     <?php } else { ?>
                     <section class="container section-tabs-system">
                             <div class="fliter-btns-group">
-                                <div class="fliter-inner">
-                                  <?php $i = 0;
-                                    while(has_sub_field('double_filters_layout')):
-                                        $tab = strtolower(get_sub_field("horizontal_tab"));
-                                        $tab = preg_replace('/\s+/', '_', $tab);
-                                  ?>
-                                  <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("horizontal_tab"); ?></div>
-                                  <?php $i++; endwhile; ?>
-                                  <hr class="underline" />
-                                </div>
+                              <?php $i = 0;
+                                while(has_sub_field('double_filters_layout')):
+                                    $tab = strtolower(get_sub_field("horizontal_tab"));
+                                    $tab = preg_replace('/\s+/', '_', $tab);
+                              ?>
+                              <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("horizontal_tab"); ?></div>
+                              <?php $i++; endwhile; ?>
                             </div>
                             <div class="grid section-content inner-container">
                                 <?php while(has_sub_field('double_filters_layout')):
@@ -605,8 +602,10 @@ function build_sections()
                         <header class="banner">
                           <div class="container">
                             <a class="brand inline" href="/">
-                              <?php $image = get_field('header_logo_home_page', 'option'); ?>
-                              <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="115" height="140" class="img-responsive" />
+                              <?php $image = get_field('header_logo_home_page', 'option');
+                              $imageFixed = get_field('header_mobile_logo', 'option');?>
+                              <img src="<?php echo $imageFixed['url']; ?>" alt="<?php echo $imageFixed['alt']; ?>" width="90" height="41" class="img-responsive forFixed" />
+                              <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="90" height="41" class="img-responsive forLoaded" />
                             </a>
                             <nav class="nav-primary inline">
                               <?php if (has_nav_menu('primary_navigation'))
@@ -618,7 +617,7 @@ function build_sections()
                         <?php  if(get_sub_field("banner_background_video") && !$detect->isMobile()) { ?>
                         <div class="video-background">
                             <div class="video-foreground">
-                              <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autoplay=1&controls=0&showinfo=0&rel=0" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                              <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autoplay=1&controls=0&showinfo=0&rel=0&&mute=1" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
                             </div>
                         </div>
                         <?php } ?>

@@ -389,6 +389,9 @@ h1 {
   color: $h-font-color;
   a {
     color: #b0291c;
+    &:hover {
+      color: #ab9767;
+    }
   }
   @include breakpoint(medium750-down) {
     @include font-size-sass(32px);
@@ -697,6 +700,14 @@ h5 {
   right: 20px;
   width: auto;
   outline: none;
+  &:focus {
+    outline: none;
+  }
+  @include breakpoint(small568-down) {
+    top: 6px;
+    right: 0;
+    height: 60px;
+  }
 }
 
 .wp-caption-text {
@@ -739,6 +750,10 @@ h5 {
     -moz-osx-font-smoothing: grayscale;
     vertical-align: middle;
     margin-right: 1.625rem;
+  }
+  &:hover,
+  &:focus {
+    color: #ab9767;
   }
 }
 
@@ -807,14 +822,6 @@ h5 {
 .fancybox-content {
   @include breakpoint(medium750-down) {
     padding: 20px;
-  }
-}
-
-.fancybox-button {
-  top: 6px;
-  right: 0;
-  &:focus {
-    outline: none;
   }
 }
 

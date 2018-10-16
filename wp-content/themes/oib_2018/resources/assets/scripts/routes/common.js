@@ -53,7 +53,8 @@ export default {
         $(".grid").isotope({
           itemSelector: ".element-item",
           layoutMode: "fitRows",
-          filter: filterValue
+          filter: filterValue,
+          transitionDuration: 0
           //filter: ".tourism, .oib_development"
         });
       }
@@ -67,7 +68,8 @@ export default {
       $(".grid-inner").isotope({
         itemSelector: ".element-item-inner",
         layoutMode: "fitRows",
-        filter: filterValue
+        filter: filterValue,
+        transitionDuration: 0
       });
     });
 

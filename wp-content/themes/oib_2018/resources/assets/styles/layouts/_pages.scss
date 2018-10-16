@@ -159,18 +159,21 @@
     }
     &:last-child {
       padding-right: 0;
-    }
-    @include breakpoint(medium750-down) {
-      display: block;
     }*/
+    @include breakpoint(medium750-down) {
+      padding-top: 22px;
+      padding-bottom: 22px;
+    }
     &.mobile-tab {
       border-top: 2px solid #ab9767;
       line-height: 2.875;
       padding-left: 30px;
       text-align: left;
+      width: 100%;
+      margin-left: 0;
       &:nth-last-child(2) {
         border-bottom: 2px solid #ab9767;
-        padding-right: 20px;
+        //padding-right: 20px;
       }
       &::after {
         content: "\e806";
@@ -194,6 +197,7 @@
       }
       &.mobile-tab-active {
         border-bottom: 2px solid #ab9767;
+        font-weight: 600;
         &::after {
           content: "\e807";
         }
@@ -269,7 +273,6 @@
     .inner-tab {
       padding: 3px 0;
       display: block;
-      font-weight: 400;
     }
     @include breakpoint(medium750-down) {
       max-width: none;
@@ -329,8 +332,6 @@
       }
     }
     .author-info-item {
-      font-weight: 600;
-      color: #ab9767;
       text-transform: capitalize;
       margin-bottom: 0;
     }
@@ -928,7 +929,13 @@
   .entry-content {
     border-top: 2px solid #d8d8d8;
     overflow: hidden;
-    padding: 40px 0;
+    padding: 40px 0 40px 100px;
+    @include breakpoint(medium750-down) {
+      padding-left: 30px;
+    }
+    @include breakpoint(small568-down) {
+      padding-left: 20px;
+    }
     .inner-container {
       max-width: 724px;
       width: 100%;
@@ -990,7 +997,6 @@
     z-index: 0;
   }
   .grid {
-    text-align: center;
     .element-item {
       margin: 50px 2%;
       &:first-child {
