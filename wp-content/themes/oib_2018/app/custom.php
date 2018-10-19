@@ -107,7 +107,7 @@ if( function_exists('acf_add_options_page') ) {
     'redirect'    => false
   ));
 
-  acf_add_options_sub_page(array(
+  /*acf_add_options_sub_page(array(
     'page_title'  => 'News Archives Page Setting',
     'menu_title'  => 'News Archives Page Setting',
     'menu_slug'   => 'news_archives_page_setting',
@@ -123,7 +123,7 @@ if( function_exists('acf_add_options_page') ) {
     'parent_slug'   => $parent['menu_slug'],
     'capability'  => 'activate_plugins',
     'redirect'    => false
-  ));
+  ));*/
 }
 
 if ( function_exists( 'add_theme_support' ) ) {
@@ -588,10 +588,14 @@ function build_sections()
                     <header class="banner">
                       <div class="container">
                         <a class="brand inline" href="/">
-                          <?php $image = get_field('header_logo_home_page', 'option'); ?>
-                          <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="115" height="140" class="img-responsive" />
+                            <?php
+                              $image = get_field('header_mobile_logo', 'option');
+                              $imageFixed = get_field('header_mobile_logo', 'option');
+                            ?>
+                            <img src="<?php echo $imageFixed['url']; ?>" alt="<?php echo $imageFixed['alt']; ?>" width="90" height="41" class="img-responsive forFixed" />
+                            <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="90" height="41" class="img-responsive forLoaded" />
                         </a>
-                        <nav class="mobile-primary inline">
+                        <nav class="mobile-primary inline mobile-enable">
                           <i class="icon-menu"></i>
                         </nav>
                       </div>
@@ -601,23 +605,40 @@ function build_sections()
                     <?php if(is_front_page()&&!$detect->isMobile()) { ?>
                         <header class="banner">
                           <div class="container">
-                            <a class="brand inline" href="/">
-                              <?php $image = get_field('header_logo_home_page', 'option');
-                              $imageFixed = get_field('header_mobile_logo', 'option');?>
-                              <img src="<?php echo $imageFixed['url']; ?>" alt="<?php echo $imageFixed['alt']; ?>" width="90" height="41" class="img-responsive forFixed" />
-                              <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="90" height="41" class="img-responsive forLoaded" />
-                            </a>
-                            <nav class="nav-primary inline">
-                              <?php if (has_nav_menu('primary_navigation'))
-                                { wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav']); }
-                              ?>
-                            </nav>
+                            <div class="inner-container">
+                                <a class="brand inline" href="/">
+                                  <?php
+                                    $image = get_field('header_logo_home_page', 'option');
+                                    $imageFixed = get_field('header_mobile_logo', 'option');
+                                    ?>
+                                  <img src="<?php echo $imageFixed['url']; ?>" alt="<?php echo $imageFixed['alt']; ?>" width="90" height="41" class="img-responsive forFixed" />
+                                  <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="90" height="41" class="img-responsive forLoaded" />
+                                </a>
+                                <nav class="nav-primary inline">
+                                  <?php if (has_nav_menu('primary_navigation'))
+                                    { wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav']); }
+                                  ?>
+                                </nav>
+                                <nav class="mobile-primary inline mobile-enable">
+                                  <i class="icon-menu"></i>
+                                </nav>
+                            </div>
                           </div>
                         </header>
                         <?php  if(get_sub_field("banner_background_video") && !$detect->isMobile()) { ?>
+                        <?php
+                            $startTime = get_sub_field("banner_background_video_start_time");
+                            $stopTime = get_sub_field("banner_background_video_stop_time");
+                        ?>
                         <div class="video-background">
                             <div class="video-foreground">
-                              <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autoplay=1&controls=0&showinfo=0&rel=0&&mute=1" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                <?php
+                                    if($startTime) {
+                                ?>
+                                    <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autohide=1&loop=1&autoplay=1&controls=0&showinfo=0&rel=0&playlist=<?php echo get_sub_field("banner_background_video"); ?>&mute=1&start=<?php echo $startTime; ?>" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                <?php } else { ?>
+                                    <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autohide=1&loop=1&autoplay=1&controls=0&showinfo=0&playlist=<?php echo get_sub_field("banner_background_video"); ?>&rel=0&&mute=1" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                <?php } ?>
                             </div>
                         </div>
                         <?php } ?>
@@ -778,7 +799,7 @@ function build_sections()
                       $the_query = new WP_Query( $args );
                       if( $the_query->have_posts() ) {
                     ?>
-                    <div class="grid">
+                    <div class="grid grid-tax">
                       <?php $i = 0;
                         while ( $the_query->have_posts() ): $the_query->the_post();
                           foreach (get_the_terms(get_the_ID(), 'news-filter') as $cat) {
@@ -793,10 +814,11 @@ function build_sections()
                             $category = 'news';
                             if ( ! empty( $categories ) ) {
                               $category = esc_html( $categories[0]->name );
+                              $categorySlug = esc_html( $categories[0]->slug );
                             }
                           ?>
                           <div class="item-content">
-                            <h4><?php echo $category; ?></h4>
+                            <h4><a href="/news_categories/<?php echo strtolower($categorySlug); ?>" class="cta-brown"><?php echo $category; ?></a></h4>
                             <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title(); ?></a>
                             <p><?php echo get_the_excerpt(); ?></p>
                             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>

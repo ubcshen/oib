@@ -79,6 +79,11 @@
     .nav-primary {
       padding-top: 0;
     }
+    .mobile-primary {
+      @include breakpoint(medium1000-down) {
+        padding-top: 5px;
+      }
+    }
   }
 }
 
@@ -91,6 +96,7 @@
     letter-spacing: 0;
   }
   &.current-menu-item a,
+  &.current-menu-parent > a:not([href]):not([tabindex]),
   &.current-menu-ancestor > a {
     color: #b0291c;
     font-weight: 600;
@@ -149,26 +155,34 @@
 
 .banner {
   img {
-    @include breakpoint(medium910-down) {
+    @include breakpoint(medium1000-down) {
       max-width: 94px;
     }
   }
 }
 
 .nav-primary {
-  @include breakpoint(medium910-down) {
+  @include breakpoint(medium1000-down) {
     display: none;
   }
 }
 
 .mobile-primary {
   display: none;
-  @include breakpoint(medium910-down) {
+  @include breakpoint(medium1000-down) {
     display: inline-block;
     float: right;
     padding-right: 0;
-    padding-top: 10px;
+    padding-top: 35px;
   }
+  &.mobile-enable {
+    @include breakpoint(medium910-down) {
+      padding-top: 7px;
+    }
+  }
+  /*@include breakpoint(medium910-down) {
+    padding-top: 5px;
+  }*/
 }
 
 .hide-desktop {
@@ -186,7 +200,7 @@
   a:not([href]):not([tabindex]) {
     padding: 8px 8px 3px 32px;
     text-decoration: none;
-    @include font-size-sass(14px);
+    @include font-size-sass(16px);
     color: #fff;
     display: block;
     transition: 0.3s;
@@ -209,6 +223,7 @@
     background-color: transparent;
     left: 0;
     margin-left: 0;
+    display: none;
     .menu-item {
       border-bottom: none;
       a {
@@ -225,12 +240,44 @@
       margin-left: 0;
     }
   }
-  .menu-item-has-children > a::after {
-    content: "\E80A";
-    padding-left: 0;
-    padding-right: 32px;
-    float: right;
+  .menu-item-has-children {
+    & > a::after {
+      content: "\E80A";
+      padding-left: 0;
+      padding-right: 32px;
+      float: right;
+      font-family: "fontello";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: 0.2em;
+      text-align: center;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1em;
+      margin-left: 0.2em;
+      padding-top: 6px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    &.open {
+      & > a::after {
+        content: "\e809";
+      }
+      .sub-menu {
+        display: block;
+      }
+    }
+    &:hover .sub-menu {
+      display: none;
+    }
+    &.open:hover {
+      .sub-menu {
+        display: block;
+      }
+    }
   }
 }
-
-

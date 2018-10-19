@@ -150,7 +150,7 @@ export default {
 
     $(window).scroll(function (event) {
       var scroll = $(window).scrollTop();
-      if(scroll>110) {
+      if(scroll>118) {
         $(".banner").addClass("fixed");
       }
       else {
@@ -214,6 +214,18 @@ export default {
         //if($(selectOption))
       });
     }
+
+    $(".hide-desktop .nav li").click(function() {
+      if($(this).hasClass("menu-item-has-children")) {
+        if($(this).hasClass("open")) {
+          $(this).removeClass("open");
+        }
+        else {
+          $(".menu-item-has-children").removeClass("open");
+          $(this).addClass("open");
+        }
+      }
+    });
 
     if($(".mobile-primary").is(':visible')) {
       if(!$(".icon-menu").hasClass("close")) {

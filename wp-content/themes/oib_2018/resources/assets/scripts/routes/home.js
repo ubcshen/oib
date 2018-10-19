@@ -7,6 +7,8 @@ export default {
       $(".home .section-banner").height(ww/ratio);
     }
 
+    changeHeight();
+
     $(window).resize(function() {
       changeHeight();
     });

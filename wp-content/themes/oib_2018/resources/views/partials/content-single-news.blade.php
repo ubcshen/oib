@@ -1,6 +1,7 @@
 <?php
 $categories = get_the_terms( $post->ID , 'news-filter' );
 $category = 'news';
+$detect = new Mobile_Detect;
 if ( ! empty( $categories ) ) {
   $category = esc_html( $categories[0]->name );
 }
@@ -19,19 +20,21 @@ if ( ! empty( $categories ) ) {
     <div class="inner-container fLeft">
       @php the_content() @endphp
     </div>
-    <div class="sidebar fRight">
-      <div class="sidebar-subscribe"><?php echo get_field("sidebar_subscribe", 'option'); ?></div>
-      <?php
-        while(has_sub_field('sidebar_images', 'option')):
-          $linkTarget = get_sub_field("sidebar_image_link_open_new_tab", 'option');
-          $openTab = ($linkTarget) ? "_blank" : "_self";
-          $image = get_sub_field('sidebar_image', 'option');
-      ?>
-      <a href="<?php echo get_sub_field("sidebar_image_link", 'option'); ?>" target="<?php echo $openTab; ?>">
-        <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive" />
-      </a>
-      <?php endwhile; ?>
-    </div>
+    <?php if(!$detect->isMobile()) { ?>
+      <div class="sidebar fRight">
+        <div class="sidebar-subscribe"><?php echo get_field("sidebar_subscribe", 'option'); ?></div>
+        <?php
+          while(has_sub_field('sidebar_images', 'option')):
+            $linkTarget = get_sub_field("sidebar_image_link_open_new_tab", 'option');
+            $openTab = ($linkTarget) ? "_blank" : "_self";
+            $image = get_sub_field('sidebar_image', 'option');
+        ?>
+        <a href="<?php echo get_sub_field("sidebar_image_link", 'option'); ?>" target="<?php echo $openTab; ?>">
+          <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive" />
+        </a>
+        <?php endwhile; ?>
+      </div>
+    <?php } ?>
   </div>
   @php comments_template('/partials/comments.blade.php') @endphp
   <div class="related-news container">
@@ -79,4 +82,19 @@ if ( ! empty( $categories ) ) {
       </div>
     </div>
   </div>
+  <?php if($detect->isMobile()) { ?>
+    <div class="sidebar fRight">
+      <div class="sidebar-subscribe"><?php echo get_field("sidebar_subscribe", 'option'); ?></div>
+      <?php
+        while(has_sub_field('sidebar_images', 'option')):
+          $linkTarget = get_sub_field("sidebar_image_link_open_new_tab", 'option');
+          $openTab = ($linkTarget) ? "_blank" : "_self";
+          $image = get_sub_field('sidebar_image', 'option');
+      ?>
+      <a href="<?php echo get_sub_field("sidebar_image_link", 'option'); ?>" target="<?php echo $openTab; ?>">
+        <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive" />
+      </a>
+      <?php endwhile; ?>
+    </div>
+  <?php } ?>
 </article>
