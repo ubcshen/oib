@@ -640,32 +640,55 @@ h4 {
     text-indent: 0;
     height: 50px;
     width: 50px;
+    z-index: 2;
     &:hover {
       text-decoration: none;
     }
+    @include breakpoint(medium1280-down) {
+      height: 30px;
+      width: 30px;
+    }
+    @include breakpoint(medium1100-down) {
+      height: 50px;
+      width: 50px;
+    }
   }
-  .bx-next::before {
-    content: "\e801";
-    font-family: "fontello";
-    font-style: normal;
-    font-weight: normal;
-    speak: none;
-    display: inline-block;
-    text-decoration: inherit;
-    width: 1em;
-    margin-right: 0.2em;
-    text-align: center;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1em;
-    margin-left: 0.2em;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    @include font-size-sass(50px);
+  .bx-next {
+    @include breakpoint(medium1280-down) {
+      right: 5px;
+    }
+    &::before {
+      content: "\e801";
+      font-family: "fontello";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      margin-right: 0.2em;
+      text-align: center;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1em;
+      margin-left: 0.2em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      @include font-size-sass(50px);
+      @include breakpoint(medium1280-down) {
+        @include font-size-sass(30px);
+      }
+      @include breakpoint(medium1100-down) {
+        @include font-size-sass(50px);
+      }
+    }
   }
   .bx-prev {
     left: auto;
     right: 70px;
+    @include breakpoint(medium1280-down) {
+      right: 30px;
+    }
   }
   .bx-prev::before {
     content: "\e802";
@@ -685,12 +708,18 @@ h4 {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     @include font-size-sass(50px);
+    @include breakpoint(medium1280-down) {
+      @include font-size-sass(30px);
+    }
+    @include breakpoint(medium1100-down) {
+      @include font-size-sass(50px);
+    }
   }
   .bx-controls-direction a.disabled {
     display: block;
     opacity: 0.1;
   }
-  @include breakpoint(medium750-down) {
+  @include breakpoint(medium1100-down) {
     margin-bottom: 30px;
   }
 }
@@ -856,7 +885,7 @@ h5 {
 
 .bx-wrapper .bx-controls-direction a {
   bottom: 22%;
-  @include breakpoint(medium750-down) {
+  @include breakpoint(medium1100-down) {
     position: relative;
     margin-top: 0;
     display: inline-block;
