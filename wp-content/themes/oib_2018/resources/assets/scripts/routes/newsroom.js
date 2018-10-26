@@ -3,6 +3,7 @@ export default {
     // JavaScript to be fired on the home page
     var loadMore = function(wid) {
       var itemHeight = $(".element-item")[0].scrollHeight;
+      var itemSize = $(".element-item").size();
       //console.log("sds: " + itemHeight*2);
       //console.log($(".infinitescroll")[0].scrollHeight);
       var oneItemHeight = itemHeight;
@@ -19,21 +20,40 @@ export default {
       $('#wp_pagination a').click(function (e) {
         e.preventDefault();
         //console.log($('.infinitescroll').height());
+        //console.log($(".infinitescroll")[0].scrollHeight - (addItemHeight));
         //console.log($(".infinitescroll")[0].scrollHeight);
-        if( $('.infinitescroll').height() < ($(".infinitescroll")[0].scrollHeight - (addItemHeight)) ) {
-          //console.log($(".infinitescroll")[0].scrollHeight - (oneItemHeight));
-          $('.infinitescroll').animate({
-            height: '+='+addItemHeight+'px'
-          }, 500);
-        }
-        else {
+        if(itemSize>6) {
+          if( $('.infinitescroll').height() < ($(".infinitescroll")[0].scrollHeight - (addItemHeight)) ) {
+            //console.log($(".infinitescroll")[0].scrollHeight - (oneItemHeight));
+            //console.log($('.infinitescroll').height());
+            //console.log(addItemHeight);
+            $('.infinitescroll').animate({
+              height: '+='+addItemHeight+'px'
+            }, 500);
+          }
+          else {
+            if(wid<=750) {
+              addItemHeight = addItemHeight/3;
+            }
+            $('.infinitescroll').height($(".infinitescroll")[0].scrollHeight - addItemHeight);
+            $('.infinitescroll').css({
+              height: '+=' + ( oneItemHeight + 80 ) + 'px'
+            });
+            $("#wp_pagination a").hide();
+          }
+        } else {
           if(wid<=750) {
             addItemHeight = addItemHeight/3;
+            $('.infinitescroll').height($(".infinitescroll")[0].scrollHeight - addItemHeight);
+            $('.infinitescroll').css({
+              height: '+=' + ( oneItemHeight + 80 ) + 'px'
+            });
           }
-          $('.infinitescroll').height($(".infinitescroll")[0].scrollHeight - addItemHeight);
-          $('.infinitescroll').css({
-            height: '+=' + ( oneItemHeight + 80 ) + 'px'
-          });
+          else {
+            $('.infinitescroll').animate({
+              height: '+='+0+'px'
+            }, 500);
+          }
           $("#wp_pagination a").hide();
         }
       });

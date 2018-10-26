@@ -42,6 +42,7 @@
 .banner .nav a {
   padding: 0;
   margin: 0.5rem 1rem;
+  text-decoration: none;
 }
 
 .menu-item-has-children:hover .sub-menu {
@@ -100,6 +101,7 @@
   &.current-menu-ancestor > a {
     color: #b0291c;
     font-weight: 600;
+    text-decoration: none;
   }
   &:hover > a {
     color: #b0291c;
@@ -107,10 +109,12 @@
   &.current-menu-ancestor > a {
     border-bottom: 2px solid #b0291c;
     padding-bottom: 3px;
+    text-decoration: none;
   }
   &.current-menu-ancestor .current-menu-item > a {
     padding-bottom: 0;
     border-bottom: 0;
+    text-decoration: none;
   }
 }
 
@@ -127,6 +131,7 @@
   .menu-item {
     a {
       color: #fff;
+      text-decoration: none;
     }
     .sub-menu {
       a {
@@ -155,25 +160,25 @@
 
 .banner {
   img {
-    @include breakpoint(medium1000-down) {
+    @include breakpoint(medium1025-down) {
       max-width: 94px;
     }
   }
 }
 
 .nav-primary {
-  @include breakpoint(medium1000-down) {
+  @include breakpoint(medium1025-down) {
     display: none;
   }
 }
 
 .mobile-primary {
   display: none;
-  @include breakpoint(medium1000-down) {
+  @include breakpoint(medium1025-down) {
     display: inline-block;
     float: right;
     padding-right: 0;
-    padding-top: 35px;
+    padding-top: 7px;
   }
   &.mobile-enable {
     @include breakpoint(medium910-down) {

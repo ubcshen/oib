@@ -56,7 +56,8 @@ if ( ! empty( $categories ) ) {
     <div class="grid infinitescroll">
       <?php $i = 0;
         while ( $the_query->have_posts() ): $the_query->the_post();
-          foreach (get_the_terms(get_the_ID(), 'news-filter') as $cat) {
+          //foreach (get_the_terms(get_the_ID(), 'news-filter') as $cat) {
+          $cat = get_the_terms(get_the_ID(), 'news-filter')[0];
             //$img=wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'news-thumbnail' );
       ?>
         <div class="inline element-item <?php echo $cat->slug; ?>">
@@ -78,7 +79,7 @@ if ( ! empty( $categories ) ) {
             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
           </div>
         </div>
-      <?php } $i++; endwhile; } ?>
+      <?php $i++; endwhile; } //} ?>
     </div>
   </div>
   <div id="wp_pagination">

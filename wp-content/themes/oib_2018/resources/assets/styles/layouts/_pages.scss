@@ -336,6 +336,8 @@
     max-width: 400px;
     margin: 30px 1.325%;
     width: 31.2%;
+    min-height: 496px;
+    vertical-align: top;
     /*&:nth-child(3n-2) {
       margin-left: 0;
     }
@@ -432,6 +434,12 @@
   }
 }
 
+.process {
+  .grid .element-item {
+    min-height: 0;
+  }
+}
+
 .grid-inner {
   .element-item-inner {
     max-width: 390px;
@@ -494,6 +502,9 @@
       p {
         padding: 0;
         text-align: left;
+        &:last-child {
+          padding-bottom: 1rem;
+        }
       }
     }
     .bx-wrapper {
@@ -651,6 +662,10 @@
     @include breakpoint(medium800-down) {
       width: 100%;
     }
+  }
+  h3 {
+    color: #b0291c;
+    font-weight: 600;
   }
 }
 
@@ -1008,6 +1023,13 @@
     border-top: 2px solid #d8d8d8;
     overflow: hidden;
     padding: 40px 0 40px 100px;
+    a {
+      color: #b0291c;
+      text-decoration: underline;
+      &:hover {
+        color: #ab9767;
+      }
+    }
     @include breakpoint(medium1200-down) {
       padding-left: 30px;
     }
@@ -1263,5 +1285,52 @@
 .section-tax-banner {
   @include breakpoint(medium1250-down) {
     padding-left: 10%;
+  }
+}
+
+.contact {
+  h3 {
+    font-weight: 700;
+  }
+  p {
+    padding-top: 0;
+    line-height: 1.6;
+  }
+  .hasTopbar {
+    border-color: rgba(171, 151, 103, 0.3);
+  }
+  .obi-map {
+    width: 60%;
+    iframe {
+      width: 100%;
+    }
+    @include breakpoint(medium800-down) {
+      width: 100%;
+    }
+  }
+  .obi-address {
+    width: 36%;
+    @include breakpoint(medium800-down) {
+      width: 100%;
+    }
+  }
+  .section-html {
+    padding: 2.5 rem 0;
+  }
+  .rows .col-left,
+  .rows .col-right {
+    width: 50%;
+    @include breakpoint(small580-down) {
+      width: 100%;
+    }
+  }
+  .rows .col-right {
+    float: left;
+  }
+  .additional-space {
+    margin-top: 25px;
+    @include breakpoint(small580-down) {
+      margin-top: 0;
+    }
   }
 }

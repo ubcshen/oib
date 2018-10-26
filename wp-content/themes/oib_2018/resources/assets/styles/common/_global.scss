@@ -52,6 +52,10 @@
     @media (max-width: 1390px) {
       @content;
     }
+  } @else if $point == medium1350-down {
+    @media (max-width: 1350px) {
+      @content;
+    }
   } @else if $point == medium1300-down {
     @media (max-width: 1300px) {
       @content;
@@ -405,6 +409,7 @@ h1 {
   color: $h-font-color;
   a {
     color: #b0291c;
+    text-decoration: none;
     &:hover {
       color: #ab9767;
     }
@@ -549,7 +554,7 @@ hr.short {
 
 .cookieText {
   width: 64%;
-  font-weight: 600;
+  //font-weight: 600;
   color: #fff;
   padding: 20px 0;
   line-height: 1.2;
@@ -569,12 +574,20 @@ hr.short {
     background-color: transparent !important;
     font-weight: 600;
     @include font-size-sass(20px);
+    @include breakpoint(medium800-down) {
+      @include font-size-sass(18px);
+      margin-top: 0;
+    }
   }
   .medium.cli-plugin-button.cli-plugin-button.cli-accept-button {
     font-weight: 600;
     background-color: #4a4a4a;
-    padding: 25px 40px;
+    padding: 25px;
     @include font-size-sass(20px);
+    @include breakpoint(medium1023-down) {
+      padding: 15px;
+      @include font-size-sass(18px);
+    }
   }
   @include breakpoint(medium750-down) {
     width: 100%;
@@ -605,6 +618,7 @@ h4 {
   color: #ab9767;
   text-transform: uppercase;
   font-weight: 600;
+  text-decoration: none;
 }
 
 .cta-brown:hover {
@@ -641,6 +655,7 @@ h4 {
     height: 50px;
     width: 50px;
     z-index: 2;
+    text-decoration: none;
     &:hover {
       text-decoration: none;
     }
@@ -685,7 +700,7 @@ h4 {
   }
   .bx-prev {
     left: auto;
-    right: 70px;
+    right: 80px;
     @include breakpoint(medium1280-down) {
       right: 30px;
     }
@@ -900,6 +915,33 @@ h5 {
   }
 }
 
+.process {
+  .bx-wrapper .bx-next {
+    right: 55px;
+    @include breakpoint(medium1350-down) {
+      right: 25px;
+    }
+    @include breakpoint(medium1280-down) {
+      right: 18px;
+    }
+    @include breakpoint(medium1100-down) {
+      right: 0;
+    }
+  }
+  .bx-wrapper .bx-prev {
+    right: 110px;
+    @include breakpoint(medium1350-down) {
+      right: 85px;
+    }
+    @include breakpoint(medium1280-down) {
+      right: 55px;
+    }
+  }
+  .section-tabs-system .grid .bx-wrapper .bx-controls-direction a {
+    color: #ab9767;
+  }
+}
+
 .bx-controls {
   text-align: center;
   //@include breakpoint(medium750-down) {
@@ -949,6 +991,21 @@ h5 {
   }
   figure {
     margin-top: 15px;
+  }
+}
+
+a {
+  color: #b0291c;
+  text-decoration: underline;
+  &:hover {
+    color: #ab9767;
+  }
+  span,
+  strong,
+  i,
+  u {
+    color: inherit;
+    font-size: inherit;
   }
 }
 
@@ -1034,4 +1091,30 @@ body {
 .figure-caption,
 .wp-caption-text {
   color: #4a4a4a;
+}
+
+strong {
+  font-weight: 600;
+}
+
+strong,
+u,
+i {
+  color: inherit;
+  font-size: inherit;
+}
+
+.foot-link {
+  text-decoration: none;
+}
+
+.social_icon {
+  color: #4a4a4a;
+  &:hover {
+    color: #ab9767;
+  }
+}
+
+a.btn {
+  text-decoration: none;
 }

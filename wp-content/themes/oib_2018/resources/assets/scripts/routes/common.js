@@ -36,12 +36,27 @@ export default {
           filter: filterValue,
           transitionDuration: 0
         });
+        if ($(".bxslider").is(':visible')) {
+          desktopSlider.redrawSlider();
+          //var newHeightCur = $(".bx-wrapper").parent().outerHeight();
+          //$(".grid.section-content").css("height",newHeightCur);
+        }
+        //var newHeightCur = $(".bx-wrapper").parent().outerHeight();
+        //$(".grid.section-content").css("height",newHeightCur);
       }
+      //console.log("filterValue: " + filterValue);
+      var itemHeight = $(filterValue).outerHeight();
+      //console.log("itemHeight: " + itemHeight);
+      $(".grid.section-content").css("height",itemHeight);
 
       $grid.on( 'arrangeComplete', function( event, filteredItems ) {
         if ($(".bxslider").is(':visible')) {
+          //$(".section-content").css("height",$(".bx-wrapper").parent().outerHeight());
           desktopSlider.redrawSlider();
-          $(".section-content").css("height",$(".bx-wrapper").parent().outerHeight());
+          var newHeight = $(".bx-wrapper").parent().outerHeight();
+          $(".grid.section-content").css("height",newHeight);
+          //$(".grid.section-content").height(newHeight);
+          //$(".section-content").css("height",$(".bx-wrapper").parent().outerHeight());
           //$(".section-tabs-system").css("height",$(".section-content").height());
         }
       });
@@ -72,58 +87,6 @@ export default {
         transitionDuration: 0
       });
     });
-
-    /*var initScroll = function() {
-      if ($(".grid.infinitescroll").length) {
-        $(".grid").infinitescroll({
-          behavior: "twitter",
-          bufferPx: 40,
-          //debug  : false,
-          loading: {
-            msgText: "",
-            //img : 'data:image/gif;base64,R0lGODlhAQABAIAAAP///////yH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==',
-            //img: loadImg,
-            finishedMsg: ""
-          },
-          navSelector: "#wp_pagination",
-          // selector for the paged navigation (it will be hidden)
-          nextSelector: "#wp_pagination a.next:first",
-          // selector for the NEXT link (to page 2)
-          itemSelector: ".element-item"
-          // selector for all items you'll retrieve
-        });
-      }
-    };
-
-    initScroll();*/
-
-    /*if( $(".banner").offset().top > 0 ) {
-      $(".banner").addClass("fixed");
-    }
-    else {
-      $(".banner").removeClass("fixed");
-    }*/
-
-    /*if ($(".fliter-btns-group").length) {
-      $(".fliter-btns-group .tab").first().trigger("click");
-    }*/
-
-    /*var setTab = function() {
-      if ($(".fliter-btns-group").length) {
-        var filterValue = $(".fliter-btns-group .tab:first-child").attr(
-          "data-filter"
-        );
-        if (filterValue !== "*") {
-          $(".grid").isotope({
-            itemSelector: ".element-item",
-            layoutMode: "fitRows",
-            filter: filterValue,
-          });
-        }
-      }
-    };
-
-    setTab();*/
 
     $(".member-fancybox").click(function() {
       var lightbox = $(this).attr("data-lightbox");
@@ -236,19 +199,6 @@ export default {
         });
       }
     }
-
-
-    /*$("body").click(function(e) {
-      if($(this).hasClass("open")) {
-        console.log($(e.target).attr('class'));
-        if ( !e.target.classList.contains('icon-menu close') ) {
-          console.log("111Dfd");
-          $(".icon-menu").removeClass("close");
-          $(".hide-desktop").removeClass("open");
-          $(this).removeClass("open");
-        }
-      }
-    });*/
 
 
       $('.main-container').on('click touchstart', function(e) {

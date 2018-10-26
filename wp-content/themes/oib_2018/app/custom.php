@@ -459,7 +459,7 @@ function build_sections()
                                                         $tabV = strtolower(get_sub_field("vertical_tab"));
                                                         $tabV = preg_replace('/\s+/', '_', $tabV);
                                                 ?>
-                                                <option class='filter-list filter-list-item' value='#<?php echo $tabV; ?>'><?php echo get_sub_field("vertical_tab"); ?></option>
+                                                <option class='filter-list filter-list-item' value='#<?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?>'><?php echo get_sub_field("vertical_tab"); ?></option>
                                                 <?php $j++; endwhile; ?>
                                             </select>
                                             <div class="grid-inner section-content grid-alignV mobileV-container">
@@ -468,7 +468,7 @@ function build_sections()
                                                     $tabV = strtolower(get_sub_field("vertical_tab"));
                                                     $tabV = preg_replace('/\s+/', '_', $tabV);
                                                 ?>
-                                                <div class="<?php echo $tab; ?> <?php echo $tabV; ?> element-item-inner" id="<?php echo $tabV; ?>">
+                                                <div class="<?php echo $tab; ?> <?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?> element-item-inner" id="<?php echo $tabV; ?>">
                                                     <div class="inner-container"><?php echo get_sub_field("vertical_tab_content"); ?></div>
                                                 </div>
                                                 <?php endwhile; ?>
@@ -492,7 +492,7 @@ function build_sections()
                                     $tab = strtolower(get_sub_field("tab"));
                                     $tab = preg_replace('/\s+/', '_', $tab);
                               ?>
-                              <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?> desktop-tab" data-filter=".<?php echo $tab; ?>"><?php echo get_sub_field("tab"); ?></div>
+                              <div class="inline tab <?php if($i==0) { echo "tab-active"; } ?> desktop-tab" data-filter=".<?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tab); ?>"><?php echo get_sub_field("tab"); ?></div>
                               <?php $i++; endwhile; ?>
                             </div>
                             <div class="grid section-content <?php if($tabAlignment=="vertical") echo "grid-alignV fRight"; ?>">
@@ -501,7 +501,7 @@ function build_sections()
                                     $tab = strtolower(get_sub_field("tab"));
                                     $tab = preg_replace('/\s+/', '_', $tab);
                                 ?>
-                                <div class="<?php echo $tab; ?> element-item">
+                                <div class="<?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tab); ?> element-item">
                                     <div class="inner-container"><?php echo get_sub_field("tab_section"); ?></div>
                                     <?php if(get_sub_field("has_slider")) { ?>
                                     <div class="testimonials bxslider">
@@ -561,7 +561,7 @@ function build_sections()
                                             $tabV = strtolower(get_sub_field("vertical_tab"));
                                             $tabV = preg_replace('/\s+/', '_', $tabV);
                                         ?>
-                                        <div class="inline inner-tab <?php if($j==0) { echo "tab-active"; } ?>" data-filter=".<?php echo $tabV; ?>"><?php echo get_sub_field("vertical_tab"); ?></div>
+                                        <div class="inline inner-tab <?php if($j==0) { echo "tab-active"; } ?>" data-filter=".<?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?>"><?php echo get_sub_field("vertical_tab"); ?></div>
                                         <?php $j++; endwhile; ?>
                                     </div>
                                     <div class="grid-inner section-content grid-alignV fRight">
@@ -570,7 +570,7 @@ function build_sections()
                                             $tabV = strtolower(get_sub_field("vertical_tab"));
                                             $tabV = preg_replace('/\s+/', '_', $tabV);
                                         ?>
-                                        <div class="<?php echo $tab; ?> <?php echo $tabV; ?> element-item-inner">
+                                        <div class="<?php echo $tab; ?> <?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?> element-item-inner">
                                             <div class="inner-container"><?php echo get_sub_field("vertical_tab_content"); ?></div>
                                         </div>
                                         <?php endwhile; ?>
@@ -584,7 +584,7 @@ function build_sections()
             elseif( get_row_layout() == "section_banner" ) // layout: Section Banner
             { ?>
                 <?php load_Img(".section-banner", "banner_background_image"); ?>
-                <?php if(is_front_page()&&($detect->isMobile()&&!$detect->isTablet())) { ?>
+                <?php if(is_front_page()&&($detect->isMobile())) { ?>
                     <header class="banner">
                       <div class="container">
                         <a class="brand inline" href="/">
@@ -678,6 +678,7 @@ function build_sections()
                         <div class="inner-container">
                             <div class="fLeft intro-topic">
                                 <h2><?php echo get_sub_field("section_intro_headline"); ?></h2>
+                                <?php if(get_sub_field("section_intro_headline_additional_content")) { ?><h3><?php echo get_sub_field("section_intro_headline_additional_content"); ?></h3><?php } ?>
                             </div>
                             <div class="fRight intro-content">
                                 <div><?php echo get_sub_field("section_intro_content"); ?></div>
@@ -788,6 +789,7 @@ function build_sections()
                 <section class="section-news container">
                   <div class="tabs">
                     <?php
+                      wp_reset_query();
                       global $paged;
                       if ( get_query_var('paged') ) { $paged = get_query_var('paged'); } else if ( get_query_var('page') ) {$paged = get_query_var('page'); } else {$paged = 1; }
                       $args = array(
@@ -802,7 +804,8 @@ function build_sections()
                     <div class="grid grid-tax">
                       <?php $i = 0;
                         while ( $the_query->have_posts() ): $the_query->the_post();
-                          foreach (get_the_terms(get_the_ID(), 'news-filter') as $cat) {
+                          //foreach (get_the_terms(get_the_ID(), 'news-filter') as $cat) {
+                          $cat = get_the_terms(get_the_ID(), 'news-filter')[0];
                             //$img=wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ), 'news-thumbnail' );
                       ?>
                         <div class="inline element-item <?php echo $cat->slug; ?>">
@@ -824,7 +827,7 @@ function build_sections()
                             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
                           </div>
                         </div>
-                      <?php } $i++; endwhile; wp_reset_postdata(); } ?>
+                      <?php $i++; endwhile; wp_reset_postdata(); } //} ?>
                     </div>
                   </div>
                   <div class="find_more"><a href="<?php echo get_sub_field("find_more_link"); ?>" class="btn"><?php echo get_sub_field("find_more_btn"); ?> <i class="icon-right-big"></i></a>
