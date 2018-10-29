@@ -133,7 +133,8 @@ if ( function_exists( 'add_theme_support' ) ) {
 
 if ( function_exists( 'add_image_size' ) ) {
     add_image_size('news-thumbnail', 390, 240,  array( 'center', 'top' ));
-    add_image_size('member-thumbnail', 300, 300,  array( 'center', 'top' ));
+    add_image_size('member-thumbnail', 780, 780,  array( 'center', 'top' ));
+    add_image_size('member-lightbox-thumbnail', 600, 340,  array( 'center', 'top' ));
 }
 
 function load_Img($className, $fieldName) { ?>
@@ -762,7 +763,7 @@ function build_sections()
                           if( $post_objects ): $i = 0;
                             foreach( $post_objects as $post):
                                 $image = wp_get_attachment_image_src(get_field('member_pic',$post->ID), "member-thumbnail");
-                                $imageFull = wp_get_attachment_image_src(get_field('member_pic',$post->ID), "full");
+                                $imageFull = wp_get_attachment_image_src(get_field('member_lightbox_pic',$post->ID), "full");
                         ?>
                         <div class="member <?php if($enableLightbox) { echo "member-fancybox"; } ?>" <?php if($enableLightbox) { echo "data-lightbox='.member-profile-" . $i . "'"; } ?>>
                             <img src="<?php echo $image[0]; ?>" alt="<?php echo get_the_title($post->ID); ?>" width="390" height="390" class="img-responsive team-member" />

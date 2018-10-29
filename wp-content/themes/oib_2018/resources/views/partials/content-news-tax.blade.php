@@ -2,6 +2,7 @@
 $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 $incname = $term->slug;
 $taxname = $term->name;
+print_r("dsdf: " . $incname);
 ?>
 <section class="section-tax-banner container hasBothbar">
   <a href="/newsroom/" class="backtonews">< Back to News</a>
