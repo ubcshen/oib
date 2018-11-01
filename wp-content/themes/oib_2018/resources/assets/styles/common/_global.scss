@@ -952,6 +952,31 @@ h5 {
   }
 }
 
+.opportunities {
+  .bx-wrapper .bx-next {
+    @include breakpoint(medium1280-down) {
+      right: 18px;
+    }
+    @include breakpoint(medium1200-down) {
+      right: 0;
+    }
+  }
+  .bx-wrapper .bx-prev {
+    @include breakpoint(medium1300-down) {
+      right: 65px;
+    }
+    @include breakpoint(medium1280-down) {
+      right: 40px;
+    }
+    @include breakpoint(medium1200-down) {
+      right: 35px;
+    }
+  }
+  .section-tabs-system .grid .bx-wrapper .bx-controls-direction a {
+    color: #ab9767;
+  }
+}
+
 .bx-controls {
   text-align: center;
   //@include breakpoint(medium750-down) {

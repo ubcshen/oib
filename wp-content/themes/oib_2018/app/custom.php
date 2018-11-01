@@ -730,7 +730,7 @@ function build_sections()
                         <div class="testimonial">
                             <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive testimonial-image" />
                             <div class="item-content hasBg">
-                                <p class="oib-member"><?php echo get_sub_field("oib_member_info"); ?></p>
+                                <p class="oib-member <?php if(!get_sub_field("oib_member_info")) { echo 'tran'; } ?>"><?php if(get_sub_field("oib_member_info")) { ?><?php echo get_sub_field("oib_member_info"); ?><?php } else { echo '&nbsp;'; } ?></p>
                                 <div class="hasBg-content hasBg-content<?php echo $i; ?>">
                                     <div class="hasBg-content-padding">
                                         <p class="testimonial-content"><?php echo get_sub_field("testimonial"); ?></p>
