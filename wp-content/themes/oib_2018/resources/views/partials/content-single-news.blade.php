@@ -11,8 +11,7 @@ if ( ! empty( $categories ) ) {
   <div class="container white-bg banner-content">
     <div class="cta-brown"><?php echo $category; ?></div>
     <h1><a href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a></h1>
-    <p class="author-info">Wrtitten by <?php echo get_the_author_meta( 'first_name', $post->post_author ) . ' ' . get_the_author_meta( 'last_name', $post->post_author); ?><span> | </span><?php print_r(get_the_author_meta('user_description', $post->post_author)); ?></p>
-    <p><?php echo get_the_date('F j, Y'); ?></p>
+    <p class="author-info"><?php if(get_field("display_author", 'option')) { ?>Wrtitten by <?php echo get_the_author_meta( 'first_name', $post->post_author ) . ' ' . get_the_author_meta( 'last_name', $post->post_author); ?><span> | </span><?php print_r(get_the_author_meta('user_description', $post->post_author)); ?><span> | </span><?php } ?><?php echo get_the_date('F j, Y', $post->post_author); ?></p>
   </div>
 </section>
 <article @php post_class("section-margin-top") @endphp>
@@ -22,7 +21,7 @@ if ( ! empty( $categories ) ) {
     </div>
     <?php if(!$detect->isMobile()) { ?>
       <div class="sidebar fRight">
-        <div class="sidebar-subscribe"><?php echo get_field("sidebar_subscribe", 'option'); ?></div>
+        <?php if(get_field("sidebar_subscribe", 'option')) { ?><div class="sidebar-subscribe"><?php echo get_field("sidebar_subscribe", 'option'); ?></div><?php } ?>
         <?php
           while(has_sub_field('sidebar_images', 'option')):
             $linkTarget = get_sub_field("sidebar_image_link_open_new_tab", 'option');
@@ -67,6 +66,9 @@ if ( ! empty( $categories ) ) {
               $category = esc_html( $categories[0]->name );
               $categorySlug = esc_html( $categories[0]->slug );
             }
+            $iid = get_primary_taxonomy_id(get_the_ID(), 'news-filter');
+
+            if($iid!=null) $category = get_the_category_by_ID($iid);
         ?>
         <div class="inline element-item <?php echo $cat->slug; ?>">
           <div class="item">

@@ -1,0 +1,8 @@
+[25-Oct-2018 18:09:59 UTC] PHP Warning:  array_map(): Argument #2 should be an array in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1323
+[03-Jan-2019 22:05:59 UTC] PHP Warning:  array_values() expects parameter 1 to be array, string given in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 956
+[03-Jan-2019 22:05:59 UTC] PHP Warning:  array_values() expects parameter 1 to be array, string given in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1010
+[03-Jan-2019 22:06:11 UTC] PHP Warning:  array_map(): Argument #2 should be an array in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1323
+[03-Jan-2019 22:06:14 UTC] PHP Warning:  array_map(): Argument #2 should be an array in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1323
+[03-Jan-2019 22:11:14 UTC] PHP Warning:  array_map(): Argument #2 should be an array in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1323
+[03-Jan-2019 22:11:16 UTC] PHP Warning:  array_map(): Argument #2 should be an array in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1323
+[07-Jan-2019 20:42:28 UTC] PHP Warning:  array_map(): Argument #2 should be an array in /home/oibdcwww/public_html/oibdc_2018/wp-content/plugins/sharethis-share-buttons/php/class-share-buttons.php on line 1323

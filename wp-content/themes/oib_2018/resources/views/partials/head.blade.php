@@ -21,6 +21,8 @@
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
   @php wp_head() @endphp
+  <meta name="google-site-verification" content="Xbf5dGC5qKlrenNGAJdmBqMhbQPwWfQWgLIkpz7PTi8" />
+  <meta name="google-site-verification" content="l3YOnbdTPqpNRjb1WykPyP8sgWgifEzBHb5yNE9ZKV0" />
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128184004-1"></script>
   <!-- Google Tag Manager -->

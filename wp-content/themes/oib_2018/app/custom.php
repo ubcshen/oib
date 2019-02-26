@@ -137,6 +137,26 @@ if ( function_exists( 'add_image_size' ) ) {
     add_image_size('member-lightbox-thumbnail', 600, 340,  array( 'center', 'top' ));
 }
 
+//get primary category name in Wordpress
+if ( ! function_exists( 'get_primary_taxonomy_id' ) ) {
+  function get_primary_taxonomy_id( $post_id, $taxonomy ) {
+      $prm_term = '';
+      if (class_exists('WPSEO_Primary_Term')) {
+          $wpseo_primary_term = new WPSEO_Primary_Term( $taxonomy, $post_id );
+          $prm_term = $wpseo_primary_term->get_primary_term();
+      }
+      if ( !is_object($wpseo_primary_term) && empty( $prm_term ) ) {
+          $term = wp_get_post_terms( $post_id, $taxonomy );
+          if (isset( $term ) && !empty( $term ) ) {
+              return wp_get_post_terms( $post_id, $taxonomy )[0]->term_id;
+          } else {
+              return '';
+          }
+      }
+      return $wpseo_primary_term->get_primary_term();
+  }
+}
+
 function load_Img($className, $fieldName) { ?>
 
     <!--[if lt IE 9]>
@@ -322,11 +342,15 @@ function build_sections()
             {
                 load_Img(".section-subscribe", "section_subscribe_background_image");
                 $image = get_sub_field('section_subscribe_book_image');
+                $enableDownload = get_sub_field('enable_download');
             ?>
                 <section class="container section-subscribe" id="section-subscribe">
                     <div class="sub_container">
                         <h2><?php echo get_sub_field("section_subscribe_title"); ?></h2>
                         <div class="section-content"><?php echo get_sub_field("section_subscribe_content"); ?></div>
+                        <?php if($enableDownload) { ?>
+                            <a href="<?php echo get_sub_field("download_file")['url']; ?>" class="btn orange-btn" target="_blank"><?php echo get_sub_field("download_btn"); ?></a>
+                        <?php } ?>
                     </div>
                     <img src="<?php echo $image['url']; ?>" alt="<?php echo $image['alt']; ?>" width="<?php echo $image['width']; ?>" height="<?php echo $image['height']; ?>" class="img-responsive sub-img" />
                 </section>
@@ -630,28 +654,39 @@ function build_sections()
                         <?php
                             $startTime = get_sub_field("banner_background_video_start_time");
                             $stopTime = get_sub_field("banner_background_video_stop_time");
+                            $playList = get_sub_field("use_youtube_playlist");
                         ?>
                         <div class="video-background">
                             <div class="video-foreground">
                                 <?php
+                                    if(!$playList) {
                                     if($startTime) {
                                 ?>
                                     <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autohide=1&loop=1&autoplay=1&controls=0&showinfo=0&rel=0&playlist=<?php echo get_sub_field("banner_background_video"); ?>&mute=1&start=<?php echo $startTime; ?>" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
                                 <?php } else { ?>
                                     <iframe src="https://www.youtube.com/embed/<?php echo get_sub_field("banner_background_video"); ?>?autohide=1&loop=1&autoplay=1&controls=0&showinfo=0&playlist=<?php echo get_sub_field("banner_background_video"); ?>&rel=0&&mute=1" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
+                                <?php } }  else { ?>
+                                    <iframe src="https://www.youtube.com/embed/videoseries?list=<?php echo get_sub_field("banner_background_video"); ?>?autohide=1&loop=1&autoplay=1&controls=0&showinfo=0&rel=0&&mute=1" frameborder="0" allowfullscreen allow="autoplay; fullscreen"></iframe>
                                 <?php } ?>
                             </div>
                         </div>
                         <?php } ?>
                     <?php } ?>
-                    <?php if(is_front_page()) { ?>
+                    <?php if(is_front_page()) { 
+                      $playList = get_sub_field("use_youtube_playlist");
+                      //echo "sds: " . $playList;
+                    ?>
                     </style><div class="valign-center"><?php } ?>
                     <div class="container">
                         <div class="inner-container">
                             <div class="fLeft banner-content">
                                 <?php if(get_sub_field("banner_lightbox_video")) { ?>
                                     <div class="video-btn">
-                                        <a class="various fancyboxVideo fancybox.iframe" href="https://www.youtube.com/embed/<?php echo get_sub_field("banner_lightbox_video"); ?>?autoplay=1"">Watch Video</a>
+                                        <?php if(!$playList) { ?>
+                                          <a class="various fancyboxVideo fancybox.iframe" href="https://www.youtube.com/embed/<?php echo get_sub_field("banner_lightbox_video"); ?>?autoplay=1&showinfo=0&rel=0">Watch Video</a>
+                                        <?php } else { ?>
+                                          <a class="various fancyboxVideo fancybox.iframe" href="https://www.youtube.com/embed/videoseries?list=<?php echo get_sub_field("banner_lightbox_video"); ?>">Watch Video</a>
+                                        <?php } ?>
                                     </div>
                                 <?php } ?>
                                 <h1><?php echo get_sub_field("banner_header"); ?></h1>
@@ -764,17 +799,26 @@ function build_sections()
                             foreach( $post_objects as $post):
                                 $image = wp_get_attachment_image_src(get_field('member_pic',$post->ID), "member-thumbnail");
                                 $imageFull = wp_get_attachment_image_src(get_field('member_lightbox_pic',$post->ID), "full");
+                                $memberGovernmentMember = get_field("member_governance_title",$post->ID);
                         ?>
                         <div class="member <?php if($enableLightbox) { echo "member-fancybox"; } ?>" <?php if($enableLightbox) { echo "data-lightbox='.member-profile-" . $i . "'"; } ?>>
                             <img src="<?php echo $image[0]; ?>" alt="<?php echo get_the_title($post->ID); ?>" width="390" height="390" class="img-responsive team-member" />
                             <div class="item-content">
                                 <h4><?php echo get_the_title($post->ID); ?></h4>
-                                <p><?php echo get_field("member_job",$post->ID); ?></p>
+                                <?php if($memberGovernmentMember&&is_page("governance")) { ?>
+                                <p class="person-title"><?php echo $memberGovernmentMember; ?></p>
+                                <?php } else { ?>
+                                <p class="person-title"><?php echo get_field("member_job",$post->ID); ?></p>
+                                <?php } ?>
                             </div>
                             <div class="hidden">
                                 <div class="member-profile member-profile-<?php echo $i; ?>">
                                     <h5><?php echo get_the_title($post->ID); ?></h5>
+                                    <?php if($memberGovernmentMember&&is_page("governance")) { ?>
+                                    <p class="person-title"><?php echo $memberGovernmentMember; ?></p>
+                                    <?php } else { ?>
                                     <p class="person-title"><?php echo get_field("member_job",$post->ID); ?></p>
+                                    <?php } ?>
                                     <img src="<?php echo $imageFull[0]; ?>" alt="<?php echo get_the_title($post->ID); ?>" width="<?php echo $imageFull[1]; ?>" height="<?php echo $imageFull[2]; ?>" class="img-responsive team-member" />
                                     <p class="pic-credit"><?php echo get_field("pic_credit", $post->ID); ?></p>
                                     <p class="profile"><?php echo get_field("member_profile",$post->ID); ?></p>
@@ -811,7 +855,7 @@ function build_sections()
                       ?>
                         <div class="inline element-item <?php echo $cat->slug; ?>">
                           <?php load_Feature_Img_Item(".item-" . $i, get_the_ID(), "news-thumbnail"); ?>
-                          <div class="item item-<?php echo $i; ?>"></div>
+                          <div class="item item-<?php echo $i; ?> newsitem" data-url="<?php echo get_permalink(); ?>"></div>
                           <!--<img src="<?php echo $img[0]; ?>" width="<?php echo $img[1]; ?>" height="<?php echo $img[2]; ?>" alt="news featured image" class="img-responsive featured-image" /> -->
                           <?php
                             $categories = get_the_terms( get_the_ID(), 'news-filter' );
@@ -820,18 +864,23 @@ function build_sections()
                               $category = esc_html( $categories[0]->name );
                               $categorySlug = esc_html( $categories[0]->slug );
                             }
+                            $iid = get_primary_taxonomy_id(get_the_ID(), 'news-filter');
+
+                            if($iid!=null) $category = get_the_category_by_ID($iid);
                           ?>
                           <div class="item-content">
                             <h4><a href="/news_categories/<?php echo strtolower($categorySlug); ?>" class="cta-brown"><?php echo $category; ?></a></h4>
                             <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title(); ?></a>
                             <p><?php echo get_the_excerpt(); ?></p>
+                            <?php if(get_field("display_author", 'option')) { ?>
                             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
+                            <?php } ?>
                           </div>
                         </div>
                       <?php $i++; endwhile; wp_reset_postdata(); } //} ?>
                     </div>
                   </div>
-                  <div class="find_more"><a href="<?php echo get_sub_field("find_more_link"); ?>" class="btn"><?php echo get_sub_field("find_more_btn"); ?> <i class="icon-right-big"></i></a>
+                  <div class="find_more"><a href="<?php echo get_sub_field("find_more_link"); ?>" class="btn"><?php echo get_sub_field("find_more_btn"); ?> <i class="icon-right-big"></i></a></div>
                 </section>
             <?php }
         }

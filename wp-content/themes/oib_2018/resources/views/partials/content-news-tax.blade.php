@@ -2,7 +2,6 @@
 $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
 $incname = $term->slug;
 $taxname = $term->name;
-print_r("dsdf: " . $incname);
 ?>
 <section class="section-tax-banner container hasBothbar">
   <a href="/newsroom/" class="backtonews">< Back to News</a>
@@ -20,11 +19,11 @@ print_r("dsdf: " . $incname);
         'post_type'=>'news',
         'post_status' => 'publish',
         'posts_per_page'=>-1,
-        'paged'=>$paged,
         'orderby'=>'date',
         'tax_query'=> $tax_query
       );
       $the_query = new WP_Query( $args );
+      //print_r($the_query);
       if( $the_query->have_posts() ) {
     ?>
     <div class="grid infinitescroll grid-tax">
@@ -41,12 +40,17 @@ print_r("dsdf: " . $incname);
               $category = esc_html( $categories[0]->name );
               $categorySlug = esc_html( $categories[0]->slug );
             }
+            $iid = get_primary_taxonomy_id(get_the_ID(), 'news-filter');
+
+            if($iid!=null) $category = get_the_category_by_ID($iid);
           ?>
           <div class="item-content">
             <h4><a href="/news_categories/<?php echo strtolower($categorySlug); ?>" class="cta-brown"><?php echo $category; ?></a></h4>
             <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title(); ?></a>
             <p><?php echo get_the_excerpt(); ?></p>
+            <?php if(get_field("display_author", 'option')) { ?>
             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
+            <?php } ?>
           </div>
         </div>
       <?php //}

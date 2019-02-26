@@ -23,7 +23,7 @@ if ( ! empty( $categories ) ) {
     <div class="cta-brown"><?php echo $category; ?></div>
     <h1><a href="<?php echo get_permalink($recent_posts[0]["ID"]); ?>"><?php echo get_the_title($recent_posts[0]["ID"]); ?></a></h1>
     <p><?php echo get_the_excerpt($recent_posts[0]["ID"]); ?></p>
-    <p class="author-info">Wrtitten by <?php echo get_the_author_meta( 'first_name', $recent_posts[0]["post_author"] ) . ' ' . get_the_author_meta( 'last_name', $recent_posts[0]["post_author"] ); ?><span> | </span><?php echo get_the_date('F j, Y', $recent_posts[0]["ID"]); ?></p>
+    <p class="author-info"><?php if(get_field("display_author", 'option')) { ?>Wrtitten by <?php echo get_the_author_meta( 'first_name', $recent_posts[0]["post_author"] ) . ' ' . get_the_author_meta( 'last_name', $recent_posts[0]["post_author"] ); ?><span> | </span><?php } ?><?php echo get_the_date('F j, Y', $recent_posts[0]["ID"]); ?></p>
   </div>
 </section>
 <section class="section-news container section-margin-top">
@@ -67,7 +67,7 @@ if ( ! empty( $categories ) ) {
       ?>
         <div class="inline element-item <?php echo $cname; ?>">
           <?php load_Feature_Img_Item(".item-" . $i, get_the_ID(), "news-thumbnail"); ?>
-          <div class="item item-<?php echo $i; ?>"></div>
+          <div class="item item-<?php echo $i; ?> newsitem" data-url="<?php echo get_permalink(); ?>"></div>
           <!--<img src="<?php echo $img[0]; ?>" width="<?php echo $img[1]; ?>" height="<?php echo $img[2]; ?>" alt="news featured image" class="img-responsive featured-image" /> -->
           <?php
             $categories = get_the_terms( get_the_ID(), 'news-filter' );
@@ -76,12 +76,18 @@ if ( ! empty( $categories ) ) {
               $category = esc_html( $categories[0]->name );
               $categorySlug = esc_html( $categories[0]->slug );
             }
+
+            $iid = get_primary_taxonomy_id(get_the_ID(), 'news-filter');
+
+            if($iid!=null) $category = get_the_category_by_ID($iid);
           ?>
           <div class="item-content">
             <h4><a href="/news_categories/<?php echo strtolower($categorySlug); ?>" class="cta-brown"><?php echo $category; ?></a></h4>
             <a href="<?php echo get_permalink(); ?>" class="cta-brown"><?php echo get_the_title(); ?></a>
             <p><?php echo get_the_excerpt(); ?></p>
+            <?php if(get_field("display_author", 'option')) { ?>
             <p class="author-info-item"><?php echo get_the_author_meta( 'first_name') . ' ' . get_the_author_meta( 'last_name'); ?></p>
+            <?php } ?>
           </div>
         </div>
       <?php $i++; endwhile; } //} ?>

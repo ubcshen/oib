@@ -8,7 +8,7 @@ export default {
 
     var desktopSlider = $(".bxslider").bxSlider({
       adaptiveHeight: false,
-      controls: ($(".bxslider>div").length > 1) ? true: false,
+      controls: true,
       auto: false,
       randomStart: false,
       hideControlOnEnd: true,
@@ -36,9 +36,6 @@ export default {
           filter: filterValue,
           transitionDuration: 0
         });
-        //console.log(filterValue);
-        $(filterValue).show();
-        //console.log("filterValue: " + filterValue);
         if ($(".bxslider").is(':visible')) {
           desktopSlider.redrawSlider();
           //var newHeightCur = $(".bx-wrapper").parent().outerHeight();
@@ -47,8 +44,6 @@ export default {
         //var newHeightCur = $(".bx-wrapper").parent().outerHeight();
         //$(".grid.section-content").css("height",newHeightCur);
       }
-      //console.log(filterValue);
-      //$(filterValue).show();
       //console.log("filterValue: " + filterValue);
       var itemHeight = $(filterValue).outerHeight();
       //console.log("itemHeight: " + itemHeight);
@@ -67,10 +62,7 @@ export default {
       });
 
       if ($(".fliter-btns-group-inner").length) {   /* for business page or any page has a double filters */
-        //$(".element-item-inner").hide();
-        //console.log("test");
         var innerFilter = $(filterValue).find(".inner-tab:first");
-        //$(innerFilter).show();
         $(innerFilter).addClass("tab-active");
         $(innerFilter).trigger("click");
         $(".grid").isotope({
@@ -85,23 +77,15 @@ export default {
 
 
     $(".inner-tab").click(function() {
-      $(".element-item-inner").hide();
       $(".inner-tab").removeClass("tab-active");
       $(this).addClass("tab-active");
-      var filterValueInner = $(this).attr("data-filter");
-      //$(filterValueInner).show();
-      var gridInner = '';
-      gridInner = $(".grid-inner").isotope({
+      var filterValue = $(this).attr("data-filter");
+      $(".grid-inner").isotope({
         itemSelector: ".element-item-inner",
         layoutMode: "fitRows",
-        filter: filterValueInner,
+        filter: filterValue,
         transitionDuration: 0
       });
-      var itemInnerHeight = $(filterValueInner).outerHeight();
-      //console.log("itemHeight: " + itemHeight);
-      //console.log("itemHeight: " + itemInnerHeight);
-      $(filterValueInner).show();
-      $(".grid.inner-container, .grid-inner").css("height",itemInnerHeight);
     });
 
     $(".member-fancybox").click(function() {

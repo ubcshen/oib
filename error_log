@@ -1,0 +1,14 @@
+[04-Nov-2018 01:40:48 UTC] PHP Fatal error:  Uncaught Symfony\Component\Debug\Exception\FatalThrowableError: Call to undefined function get_primary_taxonomy_id() in /home/oibdcwww/public_html/oibdc_2018/wp-content/uploads/cache/a3698cea81536fa2ec4d93279701c2d03f9d10bf.php:80
+Stack trace:
+#0 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/Engines/PhpEngine.php(43): include()
+#1 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/Engines/CompilerEngine.php(59): Illuminate\View\Engines\PhpEngine->evaluatePath('/home/oibdcwww/...', Array)
+#2 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/View.php(142): Illuminate\View\Engines\CompilerEngine->get('/home/oibdcwww/...', Array)
+#3 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/View.php(125): Illuminate\View\View->getContents()
+#4 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/View.php(90): Illuminate\View\View->rend in /home/oibdcwww/public_html/oibdc_2018/wp-content/uploads/cache/a3698cea81536fa2ec4d93279701c2d03f9d10bf.php on line 80
+[04-Nov-2018 01:40:54 UTC] PHP Fatal error:  Uncaught Symfony\Component\Debug\Exception\FatalThrowableError: Call to undefined function get_primary_taxonomy_id() in /home/oibdcwww/public_html/oibdc_2018/wp-content/uploads/cache/a3698cea81536fa2ec4d93279701c2d03f9d10bf.php:80
+Stack trace:
+#0 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/Engines/PhpEngine.php(43): include()
+#1 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/Engines/CompilerEngine.php(59): Illuminate\View\Engines\PhpEngine->evaluatePath('/home/oibdcwww/...', Array)
+#2 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/View.php(142): Illuminate\View\Engines\CompilerEngine->get('/home/oibdcwww/...', Array)
+#3 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/View.php(125): Illuminate\View\View->getContents()
+#4 /home/oibdcwww/public_html/oibdc_2018/wp-content/themes/oib_2018/vendor/illuminate/view/View.php(90): Illuminate\View\View->rend in /home/oibdcwww/public_html/oibdc_2018/wp-content/uploads/cache/a3698cea81536fa2ec4d93279701c2d03f9d10bf.php on line 80

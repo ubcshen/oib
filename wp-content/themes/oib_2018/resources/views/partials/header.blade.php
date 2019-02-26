@@ -47,4 +47,4 @@
     </div>
   </div>
 </header>
-<?php }
+<?php } ?>
