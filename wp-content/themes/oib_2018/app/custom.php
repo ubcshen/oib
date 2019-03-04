@@ -493,7 +493,7 @@ function build_sections()
                                                     $tabV = strtolower(get_sub_field("vertical_tab"));
                                                     $tabV = preg_replace('/\s+/', '_', $tabV);
                                                 ?>
-                                                <div class="<?php echo $tab; ?> <?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?> element-item-inner" id="<?php echo $tabV; ?>">
+                                                <div class="<?php echo $tab; ?> <?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?> element-item-inner" id="<?php echo preg_replace("/[^A-Za-z0-9 ]/", '', $tabV); ?>">
                                                     <div class="inner-container"><?php echo get_sub_field("vertical_tab_content"); ?></div>
                                                 </div>
                                                 <?php endwhile; ?>

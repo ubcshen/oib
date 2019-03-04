@@ -1338,3 +1338,11 @@
     }
   }
 }
+
+.section-subscribe {
+  .sub_container {
+    @include breakpoint(small640-down) {
+      text-align: center;
+    }
+  }
+}

@@ -20,4 +20,8 @@
       border: 4px solid #fff;
     }
   }
+  @include breakpoint(small640-down) {
+    padding: 0.825rem 0.825rem;
+    margin: 10px auto;
+  }
 }

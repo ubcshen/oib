@@ -1022,6 +1022,9 @@ a.foot-link {
   @include breakpoint(medium750-down) {
     max-width: 750px;
   }
+  @include breakpoint(small568-down) {
+    max-width: 100%;
+  }
 }
 
 .section-tabs-system {

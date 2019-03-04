@@ -96,7 +96,7 @@ class WPSEO_Frontend {
 		remove_action( 'wp_head', 'noindex', 1 );
 
 		// When using WP 4.4, just use the new hook.
-		add_filter( 'pre_get_document_title', array( $this, 'title' ), 15 );
+		//add_filter( 'pre_get_document_title', array( $this, 'title' ), 15 );
 		add_filter( 'wp_title', array( $this, 'title' ), 15, 3 );
 
 		add_filter( 'thematic_doctitle', array( $this, 'title' ), 15 );
@@ -343,13 +343,13 @@ class WPSEO_Frontend {
 			$title = $this->add_paging_to_title( $sep, $seplocation, $title );
 			$title = $this->add_to_title( $sep, $seplocation, $title, wp_strip_all_tags( get_bloginfo( 'description' ), true ) );
 
-			return $title;
+			return "33e3; " . $title;
 		}
 
 		$title = $this->add_paging_to_title( $sep, $seplocation, $title );
 		$title = $this->add_to_title( $sep, $seplocation, $title, wp_strip_all_tags( get_bloginfo( 'name' ), true ) );
 
-		return $title;
+		return "sdas: " . $title;
 	}
 
 	/**
