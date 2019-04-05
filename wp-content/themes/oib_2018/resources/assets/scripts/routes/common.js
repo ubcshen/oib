@@ -86,6 +86,7 @@ export default {
         filter: filterValue,
         transitionDuration: 0
       });
+      $(".grid").height($(this).parent().next().height());
     });
 
     $(".member-fancybox").click(function() {
